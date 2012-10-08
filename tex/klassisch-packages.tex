@@ -1,0 +1,58 @@
+\documentclass[a4paper, 12pt, bibtotoc]{scrartcl}
+%\documentclass[a4paper, 12pt, bibtotocnumbered]{scrartcl}
+
+% In c% ase we need a glossary, or index
+% \usepackage{glossaries}
+% \glstoctrue
+% \makeglossaries
+% \makeindex
+\usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+\usepackage[ngerman]{babel}
+% \usepackage{fancyvrb}			% Allow \verbatim et al. in footnotes % \VerbatimFootnotes
+\usepackage{graphicx}			% To enable including graphics in pdf's
+\usepackage{booktabs}			% Better tables
+% \usepackage{tabulary}			% Support longer table cells
+\usepackage[utf8]{inputenc}		% For UTF-8 support
+\usepackage[T1]{fontenc}		% Use T1 font encoding for accented characters
+
+% \usepackage{ae,aecompl} % seem to need this for basictex
+% \usepackage{times}
+%\usepackage{baskervald}
+\usepackage{times}
+\usepackage{setspace}
+
+% \usepackage{xcolor}				% Allow for color (annotations)
+\usepackage[sort, round]{natbib} % Better bibliography support
+%\usepackage[sort&compress, round]{natbib} % Better bibliography support
+
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+%\renewcommand{\cftchapterfont}{\normalfont\sffamily}   
+%\renewcommand{\cftsecfont}{\bf\sffamily}
+%\renewcommand{\cftsubsecfont}{\sffamily}
+%\renewcommand{\cftfont}{\sffamily}
+%\tocloftpagestyle{plain}
+
+\renewcommand*{\sectfont}{\singlespacing\normalfont\bfseries}
+
+\bibpunct{(}{)}{;}{a}{}{,}
+
+\def\titel{[Titel]}
+\def\datum{\today}
+\def\ort{[Ort]}
+\def\autor{[Autor]}
+\def\email{[Email]}
+\def\matrikelnummer{[Matrikelnummer]}
+\def\kernfach{[Kernfach]}
+\def\zweitfach{[Zweitfach]}
+\def\art{[Art]}
+\def\veranstaltung{[Veranstaltung]}
+\def\dozentin{[Dozentin]}
+\def\institut{Institut für Philosophie}
+\def\universitaet{[Universitaet]}
+\def\semester{[Semester]}
+\def\modul{[Modul]}
+% \def\keywords{}
+\def\bibliostyle{jqt1999}
+\def\bibtex{marius}
+% \def\bibliocommand{}
