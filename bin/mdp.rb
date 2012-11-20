@@ -10,7 +10,7 @@ baseless = File.basename(full, ".*")
 base = File.basename(full)
 #olddir = File.dirname(full) # without trailing /
 #ext = File.extname(full)    # .md
-dir = "/Users/marius/drop/mdp/bin"
+dir = "/Users/marius/tmp"
 
 `cp "#{full}" #{dir}`
 Dir.chdir dir
@@ -38,8 +38,32 @@ lines = lines.insert(lines.index("\n"),
   "LatexInput: tex/#{style}-begin\n",
   "LatexFooter: tex/#{style}-footer\n")
 
+# TODO: schöner machen.
+all_text = lines.join
+re = /´.*?´/
+code_seqs = all_text.scan re
+code_seqs = code_seqs.map do |seq|
+  new_seq = "\\\\\\(" + seq.gsub("´", "") + "\\\\\\)"
+  new_seq = new_seq.
+             gsub("ZZ", "\\mathbb{Z}").
+             gsub("RR", "\\mathbb{R}").
+             gsub("NN", "\\mathbb{N}").
+             gsub("QQ", "\\mathbb{Q}").
+             gsub("CC", "\\mathbb{C}").
+             gsub("ggT", "\\text{ggT}").
+             gsub("ker", "\\text{ker}").
+             gsub("sgn", "\\text{sgn}").
+             gsub("sigma", "\\sigma").
+             gsub("phi", "\\phi").
+             gsub("φ", "\\phi").
+             gsub(" in ", " \\in ").
+             gsub(" mapsto ", " \\mapsto ").
+             gsub(" to ", " \\to ")
+  all_text = all_text.gsub(seq, new_seq)
+end
+
 file = File.new(base, "w")
-file.write(lines.join)
+file.write(all_text)
 file.close
  
 `mmd2tex "#{base}"`
