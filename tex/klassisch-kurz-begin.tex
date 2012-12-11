@@ -1,0 +1,85 @@
+% \usepackage[
+%   plainpages=false,
+%   pdfpagelabels,
+%   pdftitle={\mytitle},
+%   pagebackref,
+%   pdfauthor={\myauthor},
+%   pdfkeywords={\keywords}
+%   ]{hyperref}
+
+
+\ifx\event\undefined
+\else
+	\date[\mydate]{\today}
+\fi
+
+\expandafter\def\expandafter\quote\expandafter{\quote\onehalfspacing}
+
+\doublespacing
+\parindent 0pt
+\parskip 12pt
+
+\begin{document}
+
+
+\newgeometry{bottom=1.5cm}
+\thispagestyle{empty}
+\begin{titlepage}
+\singlespacing
+\begin{center}
+
+%\emph{Bitte in 100\% drucken}
+
+\quad\\[5cm]
+%\quad\\[6cm]
+
+%\emph{\art} \\[0.3cm]
+
+%\begin{Large}
+%  \titel
+%\end{Large} \\[3.5cm]
+
+{% set colour and font for the title 
+    \normalfont\bfseries\Large\onehalfspacing
+    %\sffamily\bfseries\Large\onehalfspacing
+    \titel \par}
+    \vskip 3.5cm
+
+von \\[0.3cm]
+%\emph{von} \\[0.3cm]
+
+\autor \\
+\email \\
+Matrikelnummer: \matrikelnummer \\
+Kernfach: \kernfach \\
+Zweitfach: \zweitfach \\[2cm]
+
+für \\[0.3cm]
+%\emph{für} \\[0.3cm]
+
+\veranstaltung \\
+bei \dozentin \\
+Modul "`\modul"' \\
+\institut \\
+\universitaet \\
+\semester
+
+\vfill
+
+\ort, \datum
+%\emph{\ort, \datum}
+
+
+\end{center}
+\end{titlepage}
+
+\restoregeometry
+
+%\pagenumbering{roman}
+%\setcounter{page}{2}
+%{\singlespacing \tableofcontents}
+%%{\sffamily\singlespacing \tableofcontents}
+%\pagebreak
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
