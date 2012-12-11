@@ -38,29 +38,101 @@ lines = lines.insert(lines.index("\n"),
   "LatexInput: tex/#{style}-begin\n",
   "LatexFooter: tex/#{style}-footer\n")
 
+# TODO: nicht in header-fields ersetzen
 # TODO: schöner machen.
 all_text = lines.join
-re = /´.*?´/
+#re = /´.*?´/
+#re = / .*? /
+re = /  .*?  /m
 code_seqs = all_text.scan re
 code_seqs = code_seqs.map do |seq|
-  new_seq = "\\\\\\(" + seq.gsub("´", "") + "\\\\\\)"
-  new_seq = new_seq.
+  #new_seq = "\\\\\\(" + seq.gsub("´", "") + "\\\\\\)"
+  new_seq = " \\\\\\(" + seq.gsub("  ", "") + "\\\\\\) "
+  new_seq = new_seq. # TODO: Substitutions in extra file
              gsub("ZZ", "\\mathbb{Z}").
              gsub("RR", "\\mathbb{R}").
              gsub("NN", "\\mathbb{N}").
              gsub("QQ", "\\mathbb{Q}").
              gsub("CC", "\\mathbb{C}").
+             gsub("FF", "\\mathbb{F}").
+             gsub("PP", "\\mathcal{P}").
              gsub("ggT", "\\text{ggT}").
              gsub("ker", "\\text{ker}").
              gsub("sgn", "\\text{sgn}").
+             gsub("sup ", "\\text{sup }").
+             gsub("inf ", "\\text{inf }").
+             gsub("min ", "\\min ").
+             gsub("max ", "\\max ").
+             gsub("Re ", "\\text{Re } ").
+             gsub("Im ", "\\text{Im } ").
+             gsub("ord", "\\text{ord}").
+             gsub("sqrt", "\\sqrt").
+             gsub("cap", "\\cap").
+             gsub("cup", "\\cup").
              gsub("sigma", "\\sigma").
              gsub("phi", "\\phi").
+             gsub("alpha", "\\alpha").
+             gsub("beta", "\\beta").
+             gsub("lam", "\\lambda").
+             gsub("mü", "\\mu").
+             gsub("eps", "\\epsilon").
              gsub("φ", "\\phi").
+             gsub("π", "\\pi").
+             gsub("pi", "\\pi").
+             gsub("theta", "\\theta").
+             gsub("≤", "\\leq").
+             gsub("≥", "\\geq").
+             gsub(" not ", " \\not ").
+             gsub("varnothing", "\\varnothing").
+             gsub("+-", "\\pm").
+             gsub("equiv", "\\equiv").
+             gsub("neq", "\\neq").
+             gsub(" mod ", " \\mod ").
              gsub(" in ", " \\in ").
              gsub(" mapsto ", " \\mapsto ").
-             gsub(" to ", " \\to ")
+             gsub(" to ", " \\to ").
+             gsub(" times ", " \\times ").
+             gsub(" setminus ", " \\setminus ").
+             gsub("infty", "\\infty").
+             gsub("forall", "\\forall").
+             gsub("exists", "\\exists").
+             gsub("overline", "\\overline").
+             gsub("right", "\\right").
+             gsub("left", "\\left").
+             gsub("widetilde", "\\widetilxxxde").
+             gsub("tilde", "\\tilde").
+             gsub("widetilxxxde", "\\widetilde").
+             gsub("unlhd", "\\unlhd").
+             gsub(" quad ", " \\quad ").
+             gsub("cdot", "\\cdot").
+             gsub("circ", "\\circ").
+             gsub("oplus", "\\oplus").
+             gsub("odot", "\\odot").
+             gsub("mapsto", "\\mapsto").
+             gsub("frac", "\\frac").
+             gsub("sum", "\\sum").
+             gsub("sin", "\\sin").
+             gsub("cos", "\\cos").
+             gsub("deg", "\\deg").
+             gsub("char(", "\\text{char}(").
+             gsub("Abb(", "\\text{Abb}(").
+             gsub("triangle", "\\triangle").
+             gsub("overset", "\\overset").
+             gsub("checkmark", "\\checkmark").
+             gsub(" sim", " \\sim").
+             gsub(" sse ", " \\subseteq ").
+             gsub("<=>", " \\Leftrightarrow").
+             gsub("=>", " \\Rightarrow").
+             gsub("qed", " \\hfill\\square").
+             gsub("limn ", "{\\displaystyle \\lim_{n \\to \\infty}} ").
+             gsub("limx ", "{\\displaystyle \\lim_{x \\to \\infty}} ")
   all_text = all_text.gsub(seq, new_seq)
 end
+
+# ugly workaround.
+all_text = lines.join unless style == "math" or style == "zettel"
+
+all_text = all_text.gsub(" [^", "[^")
 
 file = File.new(base, "w")
 file.write(all_text)
@@ -78,6 +150,11 @@ lines = File.readlines(baseless + ".tex")
                         gsub(/\\\}/, "}")
   end
 
+  # pagebreaks
+  if lines[i] == "pagebreak\n" or lines[i] == "header\n"
+    lines[i] = "\\" + lines[i]
+  end
+
   # replace strange chars
   lines[i] = lines[i].gsub(" ", " ") # <A-Space>
   lines[i] = lines[i].gsub(" ", " ") # aus MacWord-PDF kopiert
@@ -87,6 +164,8 @@ lines = File.readlines(baseless + ".tex")
 
   # workaround ?``: just replace all closing quotes.
   lines[i] = lines[i].gsub("``", "“")
+  # nach den doppelten auch die einfachen
+  lines[i] = lines[i].gsub("`", "{‘}")
 end
 
 file = File.new(baseless + ".tex", "w")
