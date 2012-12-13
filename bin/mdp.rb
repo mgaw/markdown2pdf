@@ -73,6 +73,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("phi", "\\phi").
              gsub("alpha", "\\alpha").
              gsub("beta", "\\beta").
+             gsub("delta", "\\delta").
              gsub("lam", "\\lambda").
              gsub("mü", "\\mu").
              gsub("eps", "\\epsilon").
