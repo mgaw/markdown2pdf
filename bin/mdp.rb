@@ -10,7 +10,7 @@ baseless = File.basename(full, ".*")
 base = File.basename(full)
 #olddir = File.dirname(full) # without trailing /
 #ext = File.extname(full)    # .md
-dir = "/Users/marius/tmp"
+dir = "/u/gawrisch/tmp"
 
 `cp "#{full}" #{dir}`
 Dir.chdir dir
@@ -138,7 +138,7 @@ file = File.new(base, "w")
 file.write(all_text)
 file.close
  
-`mmd2tex "#{base}"`
+`multimarkdown --to=latex --output="#{baseless}.tex" "#{baseless}.md"`
 
 lines = File.readlines(baseless + ".tex")
 
@@ -173,8 +173,10 @@ file.write(lines.join)
 file.close
  
 
-`/usr/texbin/pdflatex "#{baseless}"`
-`open "#{baseless}.pdf"`
+#`/usr/texbin/pdflatex "#{baseless}"`
+`pdflatex "#{baseless}"`
+#`open "#{baseless}.pdf"`
+`cp "#{baseless}.pdf" ~/public_html`
 
 
 # TODO
