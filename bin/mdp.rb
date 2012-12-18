@@ -107,6 +107,8 @@ code_seqs = code_seqs.map do |seq|
              gsub("rangle", "\\rangle").
              gsub("right|", "\\right|").
              gsub("left|", "\\left|").
+             gsub("right(", "\\right(").
+             gsub("left)", "\\left)").
              gsub("widetilde", "\\widetilxxxde").
              gsub("tilde", "\\tilde").
              gsub("widetilxxxde", "\\widetilde").
