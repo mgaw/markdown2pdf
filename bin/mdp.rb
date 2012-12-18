@@ -82,7 +82,9 @@ code_seqs = code_seqs.map do |seq|
              gsub("pi", "\\pi").
              gsub("theta", "\\theta").
              gsub("≤", "\\leq").
+             gsub("<=", "\\leq").
              gsub("≥", "\\geq").
+             gsub(">=", "\\geq").
              gsub(" not ", " \\not ").
              gsub("varnothing", "\\varnothing").
              gsub("+-", "\\pm").
