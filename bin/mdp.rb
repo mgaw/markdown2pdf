@@ -10,7 +10,8 @@ baseless = File.basename(full, ".*")
 base = File.basename(full)
 #olddir = File.dirname(full) # without trailing /
 #ext = File.extname(full)    # .md
-dir = "/u/gawrisch/tmp"
+dir = "/Users/marius/tmp"
+#dir = "/u/gawrisch/tmp"
 
 `cp "#{full}" #{dir}`
 Dir.chdir dir
@@ -131,6 +132,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("checkmark", "\\checkmark").
              gsub(" sim", " \\sim").
              gsub(" sse ", " \\subseteq ").
+             gsub(" ssne ", " \\subsetneq ").
              gsub("<=>", " \\Leftrightarrow").
              gsub("=>", " \\Rightarrow").
              gsub("qed", " \\hfill\\square").
@@ -186,8 +188,8 @@ file.close
 
 #`/usr/texbin/pdflatex "#{baseless}"`
 `pdflatex "#{baseless}"`
-#`open "#{baseless}.pdf"`
-`cp "#{baseless}.pdf" ~/public_html`
+`open "#{baseless}.pdf"` #TODO: if exists open
+#`cp "#{baseless}.pdf" ~/public_html` #TODO: if exists public_html
 
 
 # TODO
