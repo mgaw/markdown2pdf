@@ -69,10 +69,13 @@ code_seqs = code_seqs.map do |seq|
              gsub("sqrt", "\\sqrt").
              gsub("cap", "\\cap").
              gsub("cup", "\\cup").
+             gsub("big\\cup", "\\bigcup").
+             gsub("big\\cap", "\\bigcap").
              gsub("sigma", "\\sigma").
              gsub("phi", "\\phi").
              gsub("alpha", "\\alpha").
              gsub("beta", "\\beta").
+             gsub("delta", "\\delta").
              gsub("lam", "\\lambda").
              gsub("mü", "\\mu").
              gsub("eps", "\\epsilon").
@@ -97,8 +100,11 @@ code_seqs = code_seqs.map do |seq|
              gsub("forall", "\\forall").
              gsub("exists", "\\exists").
              gsub("overline", "\\overline").
-             gsub("right", "\\right").
-             gsub("left", "\\left").
+             gsub("span", "\\text{span}").
+             gsub("langle", "\\langle").
+             gsub("rangle", "\\rangle").
+             gsub("right|", "\\right|").
+             gsub("left|", "\\left|").
              gsub("widetilde", "\\widetilxxxde").
              gsub("tilde", "\\tilde").
              gsub("widetilxxxde", "\\widetilde").
@@ -124,6 +130,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("<=>", " \\Leftrightarrow").
              gsub("=>", " \\Rightarrow").
              gsub("qed", " \\hfill\\square").
+             gsub("displaystyle", "\\displaystyle").
              gsub("limn ", "{\\displaystyle \\lim_{n \\to \\infty}} ").
              gsub("limx ", "{\\displaystyle \\lim_{x \\to \\infty}} ")
   all_text = all_text.gsub(seq, new_seq)
