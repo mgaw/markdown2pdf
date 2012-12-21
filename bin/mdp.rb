@@ -131,6 +131,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("checkmark", "\\checkmark").
              gsub(" sim", " \\sim").
              gsub(" sse ", " \\subseteq ").
+             gsub(" ssne ", " \\subsetneq ").
              gsub("<=>", " \\Leftrightarrow").
              gsub("=>", " \\Rightarrow").
              gsub("qed", " \\hfill\\square").
