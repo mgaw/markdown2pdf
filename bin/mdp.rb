@@ -55,6 +55,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("QQ", "\\mathbb{Q}").
              gsub("CC", "\\mathbb{C}").
              gsub("FF", "\\mathbb{F}").
+             gsub("KK", "\\mathbb{K}").
              gsub("PP", "\\mathcal{P}").
              gsub("ggT", "\\text{ggT}").
              gsub("ker", "\\text{ker}").
@@ -124,13 +125,17 @@ code_seqs = code_seqs.map do |seq|
              gsub("sin", "\\sin").
              gsub("cos", "\\cos").
              gsub("deg", "\\deg").
+             gsub("dim", "\\dim").
              gsub("char(", "\\text{char}(").
              gsub("Abb(", "\\text{Abb}(").
              gsub("triangle", "\\triangle").
              gsub("overset", "\\overset").
              gsub("checkmark", "\\checkmark").
              gsub(" sim", " \\sim").
+             gsub("cong", "\\cong").
              gsub(" sse ", " \\subseteq ").
+             gsub("supset", "\\supset").
+             gsub("subset", "\\subset").
              gsub(" ssne ", " \\subsetneq ").
              gsub("<=>", " \\Leftrightarrow").
              gsub("=>", " \\Rightarrow").
