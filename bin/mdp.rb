@@ -10,7 +10,8 @@ baseless = File.basename(full, ".*")
 base = File.basename(full)
 #olddir = File.dirname(full) # without trailing /
 #ext = File.extname(full)    # .md
-dir = "/u/gawrisch/tmp"
+dir = "/Users/marius/tmp" if File.exists("/Users/marius/tmp")
+dir = "/u/gawrisch/tmp" if File.exists("/u/gawrisch/tmp")
 
 `cp "#{full}" #{dir}`
 Dir.chdir dir
@@ -190,10 +191,9 @@ file.write(lines.join)
 file.close
  
 
-#`/usr/texbin/pdflatex "#{baseless}"`
 `pdflatex "#{baseless}"`
-#`open "#{baseless}.pdf"`
-`cp "#{baseless}.pdf" ~/public_html`
+`open "#{baseless}.pdf"` if `which open` != ""
+`cp "#{baseless}.pdf" ~/public_html` if File.exists("~/public_html")
 
 
 # TODO
