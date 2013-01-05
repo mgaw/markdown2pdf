@@ -10,8 +10,8 @@ baseless = File.basename(full, ".*")
 base = File.basename(full)
 #olddir = File.dirname(full) # without trailing /
 #ext = File.extname(full)    # .md
-dir = "/Users/marius/tmp" if File.exists("/Users/marius/tmp")
-dir = "/u/gawrisch/tmp" if File.exists("/u/gawrisch/tmp")
+dir = "/Users/marius/tmp" if File.exists? "/Users/marius/tmp"
+dir = "/u/gawrisch/tmp" if File.exists? "/u/gawrisch/tmp"
 
 `cp "#{full}" #{dir}`
 Dir.chdir dir
@@ -85,6 +85,8 @@ code_seqs = code_seqs.map do |seq|
              gsub("π", "\\pi").
              gsub("pi", "\\pi").
              gsub("theta", "\\theta").
+             gsub("<=>", " \\Leftrightarrow").
+             gsub("=>", " \\Rightarrow").
              gsub("≤", "\\leq").
              gsub("<=", "\\leq").
              gsub("≥", "\\geq").
@@ -109,8 +111,8 @@ code_seqs = code_seqs.map do |seq|
              gsub("rangle", "\\rangle").
              gsub("right|", "\\right|").
              gsub("left|", "\\left|").
-             gsub("right(", "\\right(").
-             gsub("left)", "\\left)").
+             gsub("right)", "\\right)").
+             gsub("left(", "\\left(").
              gsub("widetilde", "\\widetilxxxde").
              gsub("tilde", "\\tilde").
              gsub("widetilxxxde", "\\widetilde").
@@ -138,8 +140,6 @@ code_seqs = code_seqs.map do |seq|
              gsub("supset", "\\supset").
              gsub("subset", "\\subset").
              gsub(" ssne ", " \\subsetneq ").
-             gsub("<=>", " \\Leftrightarrow").
-             gsub("=>", " \\Rightarrow").
              gsub("qed", " \\hfill\\square").
              gsub("displaystyle", "\\displaystyle").
              gsub("limn ", "{\\displaystyle \\lim_{n \\to \\infty}} ").
@@ -186,14 +186,18 @@ lines = File.readlines(baseless + ".tex")
   lines[i] = lines[i].gsub("`", "{‘}")
 end
 
+all_text = lines.join
+all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad "
+all_text = all_text.gsub /(?<!\.)\.\.\$\s/, ".$\\quad "
+
 file = File.new(baseless + ".tex", "w")
-file.write(lines.join)
+file.write(all_text)
 file.close
  
 
 `pdflatex "#{baseless}"`
 `open "#{baseless}.pdf"` if `which open` != ""
-`cp "#{baseless}.pdf" ~/public_html` if File.exists("~/public_html")
+`cp "#{baseless}.pdf" ~/public_html` if File.exists? "~/public_html"
 
 
 # TODO
