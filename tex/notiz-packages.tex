@@ -1,5 +1,4 @@
-\documentclass[a4paper, 12pt, bibtotoc]{scrartcl}
-%\documentclass[a4paper, 12pt, bibtotocnumbered]{scrartcl}
+\documentclass[a4paper, 11pt]{scrartcl}
 
 % In c% ase we need a glossary, or index
 % \usepackage{glossaries}
@@ -18,22 +17,11 @@
 % \usepackage{ae,aecompl} % seem to need this for basictex
 % \usepackage{times}
 %\usepackage{baskervald}
-\usepackage{times}
 \usepackage{setspace}
+\usepackage{hyperref}
 
 % \usepackage{xcolor}				% Allow for color (annotations)
-\usepackage[sort, round]{natbib} % Better bibliography support
-%\usepackage[sort&compress, round]{natbib} % Better bibliography support
-
-\usepackage{tocloft}
-\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
-%\renewcommand{\cftchapterfont}{\normalfont\sffamily}   
-%\renewcommand{\cftsecfont}{\bf\sffamily}
-%\renewcommand{\cftsubsecfont}{\sffamily}
-%\renewcommand{\cftfont}{\sffamily}
-%\tocloftpagestyle{plain}
-
-\renewcommand*{\sectfont}{\singlespacing\normalfont\bfseries}
+\usepackage[sort&compress]{natbib} % Better bibliography support
 
 \bibpunct{(}{)}{;}{a}{}{,}
 

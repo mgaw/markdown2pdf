@@ -189,6 +189,9 @@ end
 all_text = lines.join
 all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad "
 all_text = all_text.gsub /(?<!\.)\.\.\$\s/, ".$\\quad "
+if style == "notiz"
+  all_text = all_text.sub("begin}\n", "begin}\n\\noindent ")
+end
 
 file = File.new(baseless + ".tex", "w")
 file.write(all_text)
