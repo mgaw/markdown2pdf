@@ -187,8 +187,13 @@ lines = File.readlines(baseless + ".tex")
 end
 
 all_text = lines.join
-all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad "
-all_text = all_text.gsub /(?<!\.)\.\.\$\s/, ".$\\quad "
+# "Bla.. " ersetzen
+#all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...
+# "$Bla..$ " ersetzen
+#all_text = all_text.gsub /(?<!\.)\.\.\$\s/, ".$\\quad "
+all_text = all_text.gsub("...", "#BLATEXT#").
+                    gsub("..", ".\\quad ").
+                    gsub("#BLATEXT#", "...")
 if style == "notiz"
   all_text = all_text.sub("begin}\n", "begin}\n\\noindent ")
 end
@@ -199,8 +204,8 @@ file.close
  
 
 `pdflatex "#{baseless}"`
-`open "#{baseless}.pdf"` if `which open` != ""
-`cp "#{baseless}.pdf" ~/public_html` if File.exists? "~/public_html"
+#`open "#{baseless}.pdf"` if `which open` != "" # which ist noisy auf linux
+`cp "#{baseless}.pdf" /u/gawrisch/public_html` if File.exists? "/u/gawrisch/public_html"
 
 
 # TODO
