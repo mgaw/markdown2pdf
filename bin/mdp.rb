@@ -61,6 +61,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("ggT", "\\text{ggT}").
              gsub("ker", "\\text{ker}").
              gsub("sgn", "\\text{sgn}").
+             gsub("Hom", "\\text{Hom}").
              gsub("sup ", "\\text{sup }").
              gsub("inf ", "\\text{inf }").
              gsub("min ", "\\min ").
@@ -129,6 +130,8 @@ code_seqs = code_seqs.map do |seq|
              gsub("cos", "\\cos").
              gsub("deg", "\\deg").
              gsub("dim", "\\dim").
+             gsub("exp", "\\exp").
+             gsub("ln", "\\ln").
              gsub("char(", "\\text{char}(").
              gsub("Abb(", "\\text{Abb}(").
              gsub("triangle", "\\triangle").
@@ -192,7 +195,8 @@ all_text = lines.join
 # "$Bla..$ " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\$\s/, ".$\\quad "
 all_text = all_text.gsub("...", "#BLATEXT#").
-                    gsub("..", ".\\quad ").
+                    gsub(".. ", ".\\quad ").
+                    gsub("..$ ", "$.\\quad ").
                     gsub("#BLATEXT#", "...")
 if style == "notiz"
   all_text = all_text.sub("begin}\n", "begin}\n\\noindent ")
