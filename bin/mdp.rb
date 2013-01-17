@@ -81,11 +81,15 @@ code_seqs = code_seqs.map do |seq|
              gsub("delta", "\\delta").
              gsub("lam", "\\lambda").
              gsub("mü", "\\mu").
-             gsub("eps", "\\epsilon").
+             gsub("eps", "\\varepsilon").
              gsub("φ", "\\phi").
              gsub("π", "\\pi").
              gsub("pi", "\\pi").
              gsub("theta", "\\theta").
+             gsub("ε", "\\varepsilon").
+             gsub("∂", "\\delta").
+             gsub("µ", "\\mu").
+             gsub("λ", "\\lambda").
              gsub("<=>", " \\Leftrightarrow").
              gsub("=>", " \\Rightarrow").
              gsub("≤", "\\leq").
