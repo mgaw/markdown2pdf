@@ -90,6 +90,8 @@ code_seqs = code_seqs.map do |seq|
              gsub("∂", "\\delta").
              gsub("µ", "\\mu").
              gsub("λ", "\\lambda").
+             gsub("∞", "\\infty").
+             gsub("ξ", "\\xi").
              gsub("<=>", " \\Leftrightarrow").
              gsub("=>", " \\Rightarrow").
              gsub("≤", "\\leq").
@@ -99,12 +101,15 @@ code_seqs = code_seqs.map do |seq|
              gsub(" not ", " \\not ").
              gsub("varnothing", "\\varnothing").
              gsub("+-", "\\pm").
+             gsub("±", "\\pm").
              gsub("equiv", "\\equiv").
              gsub("neq", "\\neq").
              gsub(" mod ", " \\mod ").
              gsub(" in ", " \\in ").
              gsub(" mapsto ", " \\mapsto ").
              gsub(" to ", " \\to ").
+             gsub(" up ", " \\uparrow ").
+             gsub(" down ", " \\downarrow ").
              gsub(" times ", " \\times ").
              gsub(" setminus ", " \\setminus ").
              gsub("infty", "\\infty").
@@ -149,6 +154,7 @@ code_seqs = code_seqs.map do |seq|
              gsub(" ssne ", " \\subsetneq ").
              gsub("qed", " \\hfill\\square").
              gsub("displaystyle", "\\displaystyle").
+             gsub("lim_{", "\\displaystyle \\lim_{").
              gsub("limn ", "{\\displaystyle \\lim_{n \\to \\infty}} ").
              gsub("limx ", "{\\displaystyle \\lim_{x \\to \\infty}} ")
   all_text = all_text.gsub(seq, new_seq)
