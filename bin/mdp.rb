@@ -63,6 +63,9 @@ code_seqs = code_seqs.map do |seq|
              gsub("PP", "\\mathcal{P}").
              gsub("ggT", "\\text{ggT}").
              gsub("ker", "\\text{ker}").
+             gsub("rang", "\\text{rang}").
+             gsub("Ker", "\\text{Ker}").
+             gsub("Bild", "\\text{Bild}").
              gsub("sgn", "\\text{sgn}").
              gsub("Hom", "\\text{Hom}").
              gsub("sup ", "\\text{sup }").
@@ -74,20 +77,21 @@ code_seqs = code_seqs.map do |seq|
              gsub("ord", "\\text{ord}").
              gsub("sqrt", "\\sqrt").
              gsub("smatrix{", "\\smallsmatrix{"). # use as "matrix{...}"
-             gsub("pmatrix{", "\\smallpmatrix{"). # use as "matrix{...}"
+             gsub("pm{", "\\smallpmatrix{"). # use as "matrix{...}"
              gsub("cap", "\\cap").
              gsub("cup", "\\cup").
              gsub("big\\cup", "\\bigcup").
              gsub("big\\cap", "\\bigcap").
              gsub("sigma", "\\sigma").
-             gsub("phi", "\\phi").
+             gsub("phi", "\\varphi").
+             gsub("Phi", "\\Phi").
              gsub("alpha", "\\alpha").
              gsub("beta", "\\beta").
              gsub("delta", "\\delta").
              gsub("lam", "\\lambda").
              gsub("mü", "\\mu").
              gsub("eps", "\\varepsilon").
-             gsub("φ", "\\phi").
+             gsub("φ", "\\varphi").
              gsub("π", "\\pi").
              gsub("pi", "\\pi").
              gsub("theta", "\\theta").
@@ -113,6 +117,7 @@ code_seqs = code_seqs.map do |seq|
              gsub(" in ", " \\in ").
              gsub(" mapsto ", " \\mapsto ").
              gsub(" to ", " \\to ").
+             gsub(" simto ", " \\xrightarrow{\\sim} ").
              gsub(" up ", " \\uparrow ").
              gsub(" down ", " \\downarrow ").
              gsub(" times ", " \\times ").
@@ -134,6 +139,9 @@ code_seqs = code_seqs.map do |seq|
              gsub("unlhd", "\\unlhd").
              gsub(" quad ", " \\quad ").
              gsub("cdot", "\\cdot").
+             gsub("ddots", "\\ddots").
+             gsub("cdots", "\\cdots").
+             gsub("vdots", "\\vdots").
              gsub("circ", "\\circ").
              gsub("oplus", "\\oplus").
              gsub("odot", "\\odot").
