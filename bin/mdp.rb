@@ -48,7 +48,10 @@ re = /  .*?  /m
 code_seqs = all_text.scan re
 code_seqs = code_seqs.map do |seq|
   #new_seq = "\\\\\\(" + seq.gsub("´", "") + "\\\\\\)"
-  new_seq = " \\\\\\(" + seq.gsub("  ", "") + "\\\\\\) "
+  boring = seq.index("\\\\").nil?
+  puts seq.index("\\\\").to_s + seq unless boring
+  new_seq = " \\\\\\(" + seq.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\\\) " # hui.
+  puts new_seq unless boring
   new_seq = new_seq. # TODO: Substitutions in extra file
              gsub("ZZ", "\\mathbb{Z}").
              gsub("RR", "\\mathbb{R}").
@@ -70,6 +73,8 @@ code_seqs = code_seqs.map do |seq|
              gsub("Im ", "\\text{Im } ").
              gsub("ord", "\\text{ord}").
              gsub("sqrt", "\\sqrt").
+             gsub("smatrix{", "\\smallsmatrix{"). # use as "matrix{...}"
+             gsub("pmatrix{", "\\smallpmatrix{"). # use as "matrix{...}"
              gsub("cap", "\\cap").
              gsub("cup", "\\cup").
              gsub("big\\cup", "\\bigcup").
