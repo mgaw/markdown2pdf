@@ -63,11 +63,13 @@ code_seqs = code_seqs.map do |seq|
              gsub("PP", "\\mathcal{P}").
              gsub("ggT", "\\text{ggT}").
              gsub("ker", "\\text{ker}").
-             gsub("rang", "\\text{rang}").
+             gsub("rang(", "\\text{rang(}").
+             gsub("Rang(", "\\text{Rang(}").
              gsub("Ker", "\\text{Ker}").
              gsub("Bild", "\\text{Bild}").
              gsub("sgn", "\\text{sgn}").
              gsub("Hom", "\\text{Hom}").
+             gsub("Id", "\\text{Id}").
              gsub("sup ", "\\text{sup }").
              gsub("inf ", "\\text{inf }").
              gsub("min ", "\\min ").
