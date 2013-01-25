@@ -42,16 +42,10 @@ lines = lines.insert(lines.index("\n"),
 # TODO: nicht in header-fields ersetzen
 # TODO: schöner machen.
 all_text = lines.join
-#re = /´.*?´/
-#re = / .*? /
 re = /  .*?  /m
 code_seqs = all_text.scan re
 code_seqs = code_seqs.map do |seq|
-  #new_seq = "\\\\\\(" + seq.gsub("´", "") + "\\\\\\)"
-  boring = seq.index("\\\\").nil?
-  puts seq.index("\\\\").to_s + seq unless boring
   new_seq = " \\\\\\(" + seq.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\\\) " # hui.
-  puts new_seq unless boring
   new_seq = new_seq. # TODO: Substitutions in extra file
              gsub("ZZ", "\\mathbb{Z}").
              gsub("RR", "\\mathbb{R}").
@@ -65,6 +59,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("ker", "\\text{ker}").
              gsub("rang(", "\\text{rang(}").
              gsub("Rang(", "\\text{Rang(}").
+             gsub("Lös(", "\\text{Lös(}").
              gsub("Ker", "\\text{Ker}").
              gsub("Bild", "\\text{Bild}").
              gsub("sgn", "\\text{sgn}").
