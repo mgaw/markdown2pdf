@@ -75,6 +75,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("sqrt", "\\sqrt").
              gsub("smatrix{", "\\smallsmatrix{"). # use as "matrix{...}"
              gsub("pm{", "\\smallpmatrix{"). # use as "matrix{...}"
+             gsub("vm{", "\\smallvmatrix{"). # use as "matrix{...}"
              gsub("cap", "\\cap").
              gsub("cup", "\\cup").
              gsub("big\\cup", "\\bigcup").
@@ -149,6 +150,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("sin", "\\sin").
              gsub("cos", "\\cos").
              gsub("deg", "\\deg").
+             gsub("det", "\\det").
              gsub("dim", "\\dim").
              gsub("exp", "\\exp").
              gsub("norm", "\\norm").
