@@ -145,11 +145,14 @@ code_seqs = code_seqs.map do |seq|
              gsub("mapsto", "\\mapsto").
              gsub("frac", "\\frac").
              gsub("sum", "\\sum").
+             gsub("int", "\\int").
              gsub("sin", "\\sin").
              gsub("cos", "\\cos").
              gsub("deg", "\\deg").
              gsub("dim", "\\dim").
              gsub("exp", "\\exp").
+             gsub("norm", "\\norm").
+             gsub("abs", "\\abs").
              gsub("ln", "\\ln").
              gsub("char(", "\\text{char}(").
              gsub("Abb(", "\\text{Abb}(").
