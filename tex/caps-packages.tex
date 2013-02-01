@@ -1,4 +1,4 @@
-\documentclass[a4paper, 12pt, bibtotoc]{scrartcl}
+\documentclass[a4paper, 12pt, bibtotoc, twoside]{scrartcl}
 %\documentclass[a4paper, 12pt, bibtotocnumbered]{scrartcl}
 
 % In c% ase we need a glossary, or index
@@ -6,7 +6,7 @@
 % \glstoctrue
 % \makeglossaries
 % \makeindex
-\usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+\usepackage[top=1.7cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
 \usepackage[ngerman]{babel}
 % \usepackage{fancyvrb}			% Allow \verbatim et al. in footnotes % \VerbatimFootnotes
 \usepackage{graphicx}			% To enable including graphics in pdf's
@@ -43,9 +43,9 @@
 
 \usepackage{titlesec}
 \renewcommand{\thesection}{\Roman{section}}
-%\titleformat{\section}{\normalsize\scshape\centering\lowercase}{\thesection.}{0.5em}{}
 %\titleformat{\section}{\normalsize\scshape\centering\MakeLowercase}{}{0em}{}
-\titleformat{\section}{\singlespacing\normalsize\scshape\centering}{\thesection.}{1em}{}
+%\titleformat{\section}{\singlespacing\normalsize\scshape\centering}{\thesection.}{1em}{}
+\titleformat{\section}{\singlespacing\normalsize\scshape\centering}{}{0em}{}
 \titleformat{\subsection}{\singlespacing\normalsize\itshape}{\normalfont \thesubsection}{1em}{}
 
 \parindent 2em
@@ -57,7 +57,7 @@
 \setlength{\headheight}{30.2pt}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[R]{\small\thepage}
+%\fancyhead[R]{\small\thepage}
 %\fancyhead[C]{\leftmark}
 %\fancyhead[C]{\textsc{zuständigkeitsbereich des feminismus}}
 
