@@ -82,6 +82,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("big\\cap", "\\bigcap").
              gsub("sigma", "\\sigma").
              gsub("phi", "\\varphi").
+             gsub("psi", "\\psi").
              gsub("Phi", "\\Phi").
              gsub("alpha", "\\alpha").
              gsub("beta", "\\beta").
@@ -131,9 +132,10 @@ code_seqs = code_seqs.map do |seq|
              gsub("left|", "\\left|").
              gsub("right)", "\\right)").
              gsub("left(", "\\left(").
-             gsub("widetilde", "\\widetilxxxde").
+             gsub("right\\}", "\\right\\}").
+             gsub("left\\{", "\\left\\{").
+             gsub("widetilde", "\\widxxetilxxxde").
              gsub("tilde", "\\tilde").
-             gsub("widetilxxxde", "\\widetilde").
              gsub("unlhd", "\\unlhd").
              gsub(" quad ", " \\quad ").
              gsub("cdot", "\\cdot").
@@ -171,7 +173,8 @@ code_seqs = code_seqs.map do |seq|
              gsub("displaystyle", "\\displaystyle").
              gsub("lim_{", "\\displaystyle \\lim_{").
              gsub("limn ", "{\\displaystyle \\lim_{n \\to \\infty}} ").
-             gsub("limx ", "{\\displaystyle \\lim_{x \\to \\infty}} ")
+             gsub("limx ", "{\\displaystyle \\lim_{x \\to \\infty}} ").
+             gsub("widxxetilxxxde", "widetilde")
   all_text = all_text.gsub(seq, new_seq)
 end
 
@@ -190,7 +193,7 @@ lines = File.readlines(baseless + ".tex")
 
 (0...lines.length).each do |i|
   # replace in lines that start with \def: \textbackslash{}, \{, \}
-  if lines[i] =~ /\\def.*/
+  if lines[i] =~ /\\def.*/ or lines[i] =~ /\\.*/
     lines[i] = lines[i].gsub(/\\textbackslash\{\}/, "\\").
                         gsub(/\\\{/, "{").
                         gsub(/\\\}/, "}")
