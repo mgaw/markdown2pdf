@@ -1,0 +1,80 @@
+\ifdefined\layouttimes
+\usepackage{times}
+\fi
+
+\begin{document}
+
+\ifdefined\layoutsmallheader
+\begin{small}
+\parindent 0pt
+\meta\\ \autor\ (\matrikelnummer, marius.gawrisch@gmail.com)
+\end{small}
+\vspace{0.5cm}
+\fi
+
+\ifdefined\layouttitlepage
+\thispagestyle{empty}
+\begin{titlepage}
+\singlespacing
+
+\quad \\[4cm]
+
+\begin{center}
+\begin{minipage}{0.8\linewidth}
+\begin{center}
+\textsc{\MakeLowercase{\autor}} \\[1cm]
+{% set colour and font for the title 
+    \scshape\Large\onehalfspacing
+    %\sffamily\bfseries\Large\onehalfspacing
+    \titel \par}
+\end{center}
+\end{minipage}
+
+\vskip 3.8cm
+\emph{\art}
+\end{center}
+
+\vfill
+
+\noindent\begin{minipage}{0.5\linewidth}
+Modul \emph{\modul} \\
+\veranstaltung \\
+bei \dozentin \\
+\institut \\
+\universitaet
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+\begin{flushright}
+\email \\
+Matrikelnummer: \matrikelnummer \\
+Kernfach: \kernfach \\
+Zweitfach: \zweitfach \\
+\datum
+\end{flushright}
+\end{minipage}
+\end{titlepage}
+\fi
+
+\ifdefined\layouttoc
+{\singlespacing \tableofcontents}
+\pagebreak
+\fi
+
+\ifdefined\layoutindent
+\ifdefined\layoutdoublespacing
+\parindent 2em
+\else
+\parindent 1em
+\fi
+\parskip 0pt
+\fi
+
+\ifdefined\layoutonehalfspacing
+\onehalfspacing
+\fi
+
+\ifdefined\layoutdoublespacing
+\doublespacing
+\fi
+
+\pagenumbering{arabic}

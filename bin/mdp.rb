@@ -1,45 +1,38 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 
-
-# usage: mdpdf file
-# kommt raus: file.pdf
-
 full = ARGV[0]
 baseless = File.basename(full, ".*")
 base = File.basename(full)
-#olddir = File.dirname(full) # without trailing /
-#ext = File.extname(full)    # .md
-dir = "/Users/marius/tmp" if File.exists? "/Users/marius/tmp"
-dir = "/u/gawrisch/tmp" if File.exists? "/u/gawrisch/tmp"
+dir = ENV["HOME"] + "/tmp"
 
 `cp "#{full}" #{dir}`
 Dir.chdir dir
-# puts Dir.getwd
+
 lines = File.readlines(base)
-style = "" # necessary?
-lines.each do |line|
-  if style == "" && line.index("Vorlage: ") == 0 # change to use regexp
-    style = line.chop.sub(/Vorlage: /, "").strip
-  end
-end
-style = "nostyle" if style == ""
-# puts "Found style: #{style}"
+
+# find_all deprecated?
+layout = (lines.find_all { |x| x =~ /^Layout: / }.first or "").chop.sub(/^Layout: /, "").strip
+# Bsp: "times doublespacing indent titlepage toc bibliography"
 
 # determine if there are header fields.
 unless lines[0] =~ /^[a-zA-Z]+:\s*\S+.*/
   lines = lines.insert(0, "\n")
 end
 
-lines = lines.insert(0, "LatexInput: tex/#{style}-packages\n")
-# puts lines.index("\n")
+lines = lines.insert(0,
+  "LatexInput: tex/documentclass\n",
+  "LatexInput: tex/packages\n",
+  "LatexInput: tex/default-values\n")
 lines = lines.insert(lines.index("\n"),
   "QuotesLanguage: german\n",
   "BaseHeaderLevel: 3\n",
-  "LatexInput: tex/#{style}-begin\n",
-  "LatexFooter: tex/#{style}-footer\n")
+  "LatexInput: tex/begin\n",
+  "LatexFooter: tex/footer\n")
 
-# TODO: nicht in header-fields ersetzen
+# strip header
+(0..lines.index("\n")).each { |i| lines[i] = lines[i].strip + "\n" }
+
 # TODO: schöner machen.
 all_text = lines.join
 re = /  .*?  /m
@@ -182,9 +175,6 @@ code_seqs = code_seqs.map do |seq|
   all_text = all_text.gsub(seq, new_seq)
 end
 
-# ugly workaround.
-all_text = lines.join unless style == "math" or style == "zettel"
-
 all_text = all_text.gsub(" [^", "[^")
 
 file = File.new(base, "w")
@@ -194,6 +184,10 @@ file.close
 `multimarkdown --to=latex --output="#{baseless}.tex" "#{baseless}.md"`
 
 lines = File.readlines(baseless + ".tex")
+
+layout.split(" ").each do |str|
+  lines.insert(3, "\\newcommand{\\layout#{str}}{}\n")
+end
 
 (0...lines.length).each do |i|
   # replace in lines that start with \def: \textbackslash{}, \{, \}
@@ -230,7 +224,7 @@ all_text = all_text.gsub("...", "#BLATEXT#").
                     gsub(".. ", ".\\quad ").
                     gsub("..$ ", "$.\\quad ").
                     gsub("#BLATEXT#", "...")
-if style == "notiz"
+if layout == "notiz"
   all_text = all_text.sub("begin}\n", "begin}\n\\noindent ")
 end
 
@@ -248,4 +242,3 @@ file.close
 # deutsches Datum
 # structure: tex, build, pdf, bin
 # Feld "HelperFiles: ", wo man dateinamen angibt, die im selben pfad liegen, die irgendwie strukturierte bibliographie-daten enthalten, die in eine .bib(?)-Datei geschrieben werden
-# Überschriften in gleicher Schriftart.
