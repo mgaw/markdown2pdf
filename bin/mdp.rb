@@ -213,6 +213,8 @@ end
   lines[i] = lines[i].gsub("``", "“")
   # nach den doppelten auch die einfachen
   lines[i] = lines[i].gsub("`", "{‘}")
+  # ellipsis
+  lines[i] = lines[i].gsub("...", "\\dots")
 end
 
 all_text = lines.join
