@@ -31,7 +31,7 @@ lines = lines.insert(lines.index("\n"),
   "LatexFooter: tex/footer\n")
 
 # strip header
-(0..lines.index("\n")).each { |i| lines[i] = lines[i].strip + "\n" }
+(0..lines.index("\n")).each { |i| lines[i] = lines[i].gsub(/  +/, " ").strip + "\n" }
 
 # TODO: schöner machen.
 all_text = lines.join
