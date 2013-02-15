@@ -62,7 +62,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("Lös(", "\\text{Lös(}").
              gsub("Ker", "\\text{Ker}").
              gsub("Bild", "\\text{Bild}").
-             gsub("sgn", "\\text{sgn}").
+             gsub("sgn", "\\text{sgn}"). # TODO: die alle mit DeclareMathOperator
              gsub("Hom", "\\text{Hom}").
              gsub("Id", "\\text{Id}").
              gsub("sup ", "\\text{sup }").
@@ -100,6 +100,9 @@ code_seqs = code_seqs.map do |seq|
              gsub("λ", "\\lambda").
              gsub("∞", "\\infty").
              gsub("ξ", "\\xi").
+             gsub("τ", "\\tau").
+             gsub("tau", "\\tau").
+             gsub("σ", "\\sigma").
              gsub("<=>", " \\Leftrightarrow").
              gsub("=>", " \\Rightarrow").
              gsub("≤", "\\leq").
@@ -148,6 +151,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("mapsto", "\\mapsto").
              gsub("frac", "\\frac").
              gsub("sum", "\\sum").
+             gsub("prod", "\\prod").
              gsub("int", "\\int").
              gsub("sin", "\\sin").
              gsub("cos", "\\cos").
@@ -163,7 +167,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("triangle", "\\triangle").
              gsub("overset", "\\overset").
              gsub("checkmark", "\\checkmark").
-             gsub(" sim", " \\sim").
+             gsub("sim", "\\sim").
              gsub("cong", "\\cong").
              gsub(" sse ", " \\subseteq ").
              gsub("supset", "\\supset").
@@ -193,7 +197,7 @@ lines = File.readlines(baseless + ".tex")
 
 (0...lines.length).each do |i|
   # replace in lines that start with \def: \textbackslash{}, \{, \}
-  if lines[i] =~ /\\def.*/ or lines[i] =~ /\\.*/
+  if lines[i] =~ /^\\def.*$/ or lines[i] =~ /^\\.*$/
     lines[i] = lines[i].gsub(/\\textbackslash\{\}/, "\\").
                         gsub(/\\\{/, "{").
                         gsub(/\\\}/, "}")
