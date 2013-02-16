@@ -21,7 +21,6 @@ unless lines[0] =~ /^[a-zA-Z]+:\s*\S+.*/
 end
 
 lines = lines.insert(0,
-  "LatexInput: tex/documentclass\n",
   "LatexInput: tex/packages\n",
   "LatexInput: tex/default-values\n")
 lines = lines.insert(lines.index("\n"),
@@ -186,7 +185,7 @@ file.close
 lines = File.readlines(baseless + ".tex")
 
 layout.split(" ").each do |str|
-  lines.insert(3, "\\newcommand{\\layout#{str}}{}\n")
+  lines.insert(0, "\\newcommand{\\layout#{str}}{}\n")
 end
 
 (0...lines.length).each do |i|

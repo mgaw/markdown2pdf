@@ -1,3 +1,9 @@
+\ifdefined\layouttwelvept
+\documentclass[a4paper, 12pt, bibtotoc]{scrartcl}
+\else
+\documentclass[a4paper, 11pt, bibtotoc]{scrartcl}
+\fi
+
 \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
 \usepackage[ngerman]{babel}
 \usepackage{graphicx}
@@ -7,6 +13,13 @@
 \usepackage{hyperref}
 \usepackage[sort&compress]{natbib}
 \usepackage{ellipsis}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathdots}
+
+\ifdefined\layouttimes
+\usepackage{times}
+\fi
 
 \bibpunct{(}{)}{;}{a}{}{,}
 
@@ -19,12 +32,16 @@
 
 \usepackage{tocloft}
 \renewcommand{\cfttoctitlefont}{\hfill\normalfont\bfseries\large}
-%\renewcommand{\cfttoctitlefont}{\hfill\normalfont\scshape\MakeLowercase}
 \renewcommand{\cftaftertoctitle}{\hfill}
 \renewcommand{\cftsecleader}{\hfill}
 \renewcommand{\cftsecpagefont}{\normalfont}
 \renewcommand{\cftsubsecleader}{\hfill}
 \renewcommand{\cftsecfont}{\normalfont}
 \renewcommand{\cftsubsecfont}{\itshape}
-%\renewcommand{\cftfont}{\sffamily}
 \tocloftpagestyle{empty}
+
+\newcommand{\smallsmatrix}[1]{\begin{smallmatrix}#1\end{smallmatrix}}
+\newcommand{\smallpmatrix}[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+\newcommand{\smallvmatrix}[1]{\left|\begin{smallmatrix}#1\end{smallmatrix}\right|}
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}

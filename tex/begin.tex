@@ -1,7 +1,3 @@
-\ifdefined\layouttimes
-\usepackage{times}
-\fi
-
 \begin{document}
 
 \ifdefined\layoutsmallheader
@@ -67,6 +63,11 @@ Zweitfach: \zweitfach \\
 \parindent 1em
 \fi
 \parskip 0pt
+\fi
+
+\ifdefined\layoutparskip
+\parindent 0pt
+\parskip 12pt
 \fi
 
 \ifdefined\layoutonehalfspacing
