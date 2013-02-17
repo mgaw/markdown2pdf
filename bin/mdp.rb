@@ -217,6 +217,9 @@ end
 end
 
 all_text = lines.join
+# never indent first line
+all_text = all_text.sub("\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent ")
+
 # "Bla.. " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...
 # "$Bla..$ " ersetzen

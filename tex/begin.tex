@@ -1,11 +1,25 @@
 \begin{document}
 
-\ifdefined\layoutsmallheader
+\ifdefined\layouttinyheader
 \begin{small}
-\parindent 0pt
-\meta\\ \autor\ (\matrikelnummer, marius.gawrisch@gmail.com)
+\noindent \meta \\ \autor\ (\matrikelnummer, \email)
 \end{small}
 \vspace{0.5cm}
+\fi
+
+\ifdefined\layoutsmallheader
+\begin{small}
+\noindent \meta \\ \autor\ (\matrikelnummer, \email)
+\end{small}
+\vskip 1.0cm
+\begin{center}\begin{Large}\titel\end{Large}\end{center}
+\vskip 0.5cm
+\fi
+
+\ifdefined\layoutzettel
+\pagestyle{empty}
+\newcommand{\header}{Vorlesung: \vorlesung \hfill  \autor \, (\matrikelnummer)\\ \zettel \hfill \gruppe \\ \datum}
+\header
 \fi
 
 \ifdefined\layouttitlepage
