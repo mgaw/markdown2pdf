@@ -9,6 +9,11 @@ dir = ENV["HOME"] + "/tmp"
 `cp "#{full}" #{dir}`
 Dir.chdir dir
 
+if base.sub(baseless, "") == ".tex"
+  `pdflatex "#{baseless}"`
+  exit
+end
+
 lines = File.readlines(base)
 
 # find_all deprecated?
