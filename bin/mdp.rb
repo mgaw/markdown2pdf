@@ -15,6 +15,7 @@ if base.sub(baseless, "") == ".tex"
 end
 
 lines = File.readlines(base)
+lines = lines.reject { |x| x =~ /^\/\// } # lines beginning with // are comments
 
 # find_all deprecated?
 layout = (lines.find_all { |x| x =~ /^Layout: / }.first or "").chop.sub(/^Layout: /, "").strip
@@ -225,6 +226,11 @@ all_text = lines.join
 # never indent first line
 all_text = all_text.sub("\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent ")
 
+# no number for Einleitung und Schluss
+all_text = all_text.sub("\\noindent \\section{Einleitung}", "\\phantomsection\n\\section*{Einleitung}\n\\addcontentsline{toc}{section}{\\quad\\, Einleitung}")
+all_text = all_text.sub("\\section{Schluss}", "\\phantomsection\n\\section*{Schluss}\n\\addcontentsline{toc}{section}{\\quad\\, Schluss}")
+all_text = all_text.gsub("\\end{quote}\n", "\\end{quote}")
+
 # "Bla.. " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...
 # "$Bla..$ " ersetzen
@@ -233,9 +239,6 @@ all_text = all_text.gsub("...", "#BLATEXT#").
                     gsub(".. ", ".\\quad ").
                     gsub("..$ ", "$.\\quad ").
                     gsub("#BLATEXT#", "...")
-if layout == "notiz"
-  all_text = all_text.sub("begin}\n", "begin}\n\\noindent ")
-end
 
 file = File.new(baseless + ".tex", "w")
 file.write(all_text)

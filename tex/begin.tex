@@ -70,6 +70,10 @@ Zweitfach: \zweitfach \\
 \pagebreak
 \fi
 
+% Standard: no Indentation
+\parindent 0pt
+\parskip 12pt
+
 \ifdefined\layoutindent
 \ifdefined\layoutdoublespacing
 \parindent 2em
@@ -77,11 +81,6 @@ Zweitfach: \zweitfach \\
 \parindent 1em
 \fi
 \parskip 0pt
-\fi
-
-\ifdefined\layoutparskip
-\parindent 0pt
-\parskip 12pt
 \fi
 
 \ifdefined\layoutonehalfspacing

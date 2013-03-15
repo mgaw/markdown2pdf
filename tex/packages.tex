@@ -16,8 +16,10 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathdots}
+\usepackage{microtype}
 
-\ifdefined\layouttimes
+\ifdefined\layoutcm % computer modern
+\else
 \usepackage{times}
 \fi
 
@@ -27,8 +29,8 @@
 \titleformat{\section}{\singlespacing\normalfont\bfseries\large\centering}{}{0em}{}
 \titleformat{\subsection}{\singlespacing\normalsize\itshape}{}{0em}{}
 
-\renewenvironment{quote}{\list{}{\leftmargin=2em\rightmargin=0em\small}\item[]}{\endlist}
-\expandafter\def\expandafter\quote\expandafter{\quote\singlespacing}
+\renewenvironment{quote}{\list{}{\leftmargin=0em\rightmargin=0em\small}\item[]}{\endlist}
+\expandafter\def\expandafter\quote\expandafter{\quote\vspace{-0.8em}\singlespacing}
 
 \usepackage{tocloft}
 \renewcommand{\cfttoctitlefont}{\hfill\normalfont\bfseries\large}
