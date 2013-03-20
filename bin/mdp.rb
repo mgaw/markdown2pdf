@@ -15,7 +15,7 @@ if base.sub(baseless, "") == ".tex"
 end
 
 lines = File.readlines(base)
-lines = lines.reject { |x| x =~ /^\/\// } # lines beginning with // are comments
+lines = lines.reject { |x| x =~ /^%/ } # lines beginning with % are comments
 
 # find_all deprecated?
 layout = (lines.find_all { |x| x =~ /^Layout: / }.first or "").chop.sub(/^Layout: /, "").strip
@@ -38,7 +38,7 @@ lines = lines.insert(lines.index("\n"),
 # strip header
 (0..lines.index("\n")).each { |i| lines[i] = lines[i].gsub(/  +/, " ").strip + "\n" }
 
-# TODO: schöner machen.
+# TODO: schöner machen, d.h. auslagern
 all_text = lines.join
 re = /  .*?  /m
 code_seqs = all_text.scan re
@@ -208,7 +208,7 @@ end
   end
 
   # replace strange chars
-  lines[i] = lines[i].gsub(" ", " ") # <A-Space>
+  lines[i] = lines[i].gsub(" ", " ") # <A-Space>, &nbsp;
   lines[i] = lines[i].gsub(" ", " ") # aus MacWord-PDF kopiert
   lines[i] = lines[i].gsub("ü", "ü")
   lines[i] = lines[i].gsub("ö", "ö")
@@ -226,7 +226,7 @@ all_text = lines.join
 # never indent first line
 all_text = all_text.sub("\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent ")
 
-# no number for Einleitung und Schluss
+# no number for Einleitung und Schluss/Fazit
 all_text = all_text.sub("\\noindent \\section{Einleitung}", "\\phantomsection\n\\section*{Einleitung}\n\\addcontentsline{toc}{section}{\\quad\\, Einleitung}")
 all_text = all_text.sub("\\section{Schluss}", "\\phantomsection\n\\section*{Schluss}\n\\addcontentsline{toc}{section}{\\quad\\, Schluss}")
 all_text = all_text.sub("\\section{Fazit}", "\\phantomsection\n\\section*{Fazit}\n\\addcontentsline{toc}{section}{\\quad\\, Fazit}")
