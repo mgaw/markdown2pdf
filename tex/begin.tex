@@ -16,6 +16,16 @@
 \vskip 0.5cm
 \fi
 
+\ifdefined\layouttitle
+\begin{center}
+{% set colour and font for the title 
+    \scshape\Large\onehalfspacing
+    %\sffamily\bfseries\Large\onehalfspacing
+    \titel \par}
+\end{center}
+\vskip 0.5cm
+\fi
+
 \ifdefined\layoutzettel
 \pagestyle{empty}
 \newcommand{\header}{Vorlesung: \vorlesung \hfill  \autor \, (\matrikelnummer)\\ \zettel \hfill \gruppe \\ \datum}
