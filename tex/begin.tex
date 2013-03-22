@@ -1,3 +1,10 @@
+\hypersetup{pdftitle = \titel}
+\ifdefined\layoutanon
+\hypersetup{pdfauthor = Anonymous}
+\else
+\hypersetup{pdfauthor = \autor}
+\fi
+
 \begin{document}
 
 \ifdefined\layouttinyheader
@@ -18,7 +25,7 @@
 
 \ifdefined\layouttitle
 \begin{center}
-{% set colour and font for the title 
+{% set colour and font for the title
     \scshape\Large\onehalfspacing
     %\sffamily\bfseries\Large\onehalfspacing
     \titel \par}
@@ -43,7 +50,7 @@
 \begin{minipage}{0.8\linewidth}
 \begin{center}
 \textsc{\MakeLowercase{\autor}} \\[1cm]
-{% set colour and font for the title 
+{% set colour and font for the title
     \scshape\Large\onehalfspacing
     %\sffamily\bfseries\Large\onehalfspacing
     \titel \par}
@@ -73,6 +80,25 @@ Zweitfach: \zweitfach \\
 \end{flushright}
 \end{minipage}
 \end{titlepage}
+\fi
+
+\ifdefined\layoutanon
+\begin{center}
+\emph{Hausarbeit}
+
+\vskip 1.2cm
+
+{% set colour and font for the title
+    \huge\onehalfspacing
+    %\sffamily\bfseries\Large\onehalfspacing
+    \titel \par}
+\vskip 2.5cm
+Matrikelnummer: \matrikelnummer \\
+Fach: Philosophie
+\vskip 0.5cm
+\today
+\end{center}
+\vfill
 \fi
 
 \ifdefined\layouttoc

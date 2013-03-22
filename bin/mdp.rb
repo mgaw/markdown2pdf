@@ -227,9 +227,9 @@ all_text = lines.join
 all_text = all_text.sub("\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent ")
 
 # no number for Einleitung und Schluss/Fazit
-all_text = all_text.sub("\\noindent \\section{Einleitung}", "\\phantomsection\n\\section*{Einleitung}\n\\addcontentsline{toc}{section}{\\quad\\, Einleitung}")
-all_text = all_text.sub("\\section{Schluss}", "\\phantomsection\n\\section*{Schluss}\n\\addcontentsline{toc}{section}{\\quad\\, Schluss}")
-all_text = all_text.sub("\\section{Fazit}", "\\phantomsection\n\\section*{Fazit}\n\\addcontentsline{toc}{section}{\\quad\\, Fazit}")
+all_text = all_text.sub("\\noindent \\section{Einleitung}", "\\phantomsection\n\\section*{Einleitung}\n\\addcontentsline{toc}{section}{Einleitung}")
+all_text = all_text.sub("\\section{Schluss}", "\\phantomsection\n\\section*{Schluss}\n\\addcontentsline{toc}{section}{Schluss}")
+all_text = all_text.sub("\\section{Fazit}", "\\phantomsection\n\\section*{Fazit}\n\\addcontentsline{toc}{section}{Fazit}")
 all_text = all_text.gsub("\\end{quote}\n", "\\end{quote}")
 
 # "Bla.. " ersetzen
