@@ -1,16 +1,20 @@
-\ifdefined\layouttwelvept
-\documentclass[a4paper, 12pt, bibtotoc]{scrartcl}
+\ifdefined\layoutletter
+  \documentclass[fontsize=12pt, paper=a4,
+    enlargefirstpage=on, pagenumber=headright,
+    headsepline=on, parskip=half, foldmarks=off]{scrlttr2}
 \else
-\documentclass[a4paper, 11pt, bibtotoc]{scrartcl}
+  \ifdefined\layouttwelvept
+    \documentclass[a4paper, 12pt, bibtotoc]{scrartcl}
+  \else
+    \documentclass[a4paper, 11pt, bibtotoc]{scrartcl}
+  \fi
 \fi
 
-\usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
 \usepackage[ngerman]{babel}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{setspace}
-\usepackage[sort&compress]{natbib}
 \usepackage{ellipsis}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -20,27 +24,38 @@
 
 \ifdefined\layoutcm % computer modern
 \else
-\usepackage{times}
+  \usepackage{mathptmx}
 \fi
-
-\bibpunct{(}{)}{;}{a}{}{,}
-
-\usepackage{titlesec}
-\titleformat{\section}{\singlespacing\normalfont\bfseries\large\centering}{}{0em}{}
-\titleformat{\subsection}{\singlespacing\normalsize\itshape}{}{0em}{}
 
 \renewenvironment{quote}{\list{}{\leftmargin=0em\rightmargin=0em\small}\item[]}{\endlist}
 \expandafter\def\expandafter\quote\expandafter{\quote\vspace{-0.8em}\singlespacing}
 
-\usepackage{tocloft}
-\renewcommand{\cfttoctitlefont}{\hfill\normalfont\bfseries\large}
-\renewcommand{\cftaftertoctitle}{\hfill}
-\renewcommand{\cftsecleader}{\hfill}
-\renewcommand{\cftsecpagefont}{\normalfont}
-\renewcommand{\cftsubsecleader}{\hfill}
-\renewcommand{\cftsecfont}{\normalfont}
-\renewcommand{\cftsubsecfont}{\itshape}
-\tocloftpagestyle{empty}
+\ifdefined\layoutletter
+  \setkomafont{fromname}{\sffamily \LARGE}
+  \setkomafont{fromaddress}{\sffamily}%% statt \small
+  \setkomafont{pagenumber}{\sffamily}
+  \setkomafont{subject}{\mdseries\bfseries}
+  \setkomafont{backaddress}{\mdseries}
+\else
+  \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+
+  \usepackage[sort&compress]{natbib}
+  \bibpunct{(}{)}{;}{a}{}{,}
+
+  \usepackage{titlesec}
+  \titleformat{\section}{\singlespacing\normalfont\bfseries\large\centering}{}{0em}{}
+  \titleformat{\subsection}{\singlespacing\normalsize\itshape}{}{0em}{}
+
+  \usepackage{tocloft}
+  \renewcommand{\cfttoctitlefont}{\hfill\normalfont\bfseries\large}
+  \renewcommand{\cftaftertoctitle}{\hfill}
+  \renewcommand{\cftsecleader}{\hfill}
+  \renewcommand{\cftsecpagefont}{\normalfont}
+  \renewcommand{\cftsubsecleader}{\hfill}
+  \renewcommand{\cftsecfont}{\normalfont}
+  \renewcommand{\cftsubsecfont}{\itshape}
+  \tocloftpagestyle{empty}
+\fi
 
 \newcommand{\smallsmatrix}[1]{\begin{smallmatrix}#1\end{smallmatrix}}
 \newcommand{\smallpmatrix}[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}

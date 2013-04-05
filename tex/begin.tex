@@ -110,9 +110,12 @@ Fach: Philosophie
 \pagebreak
 \fi
 
-% Standard: no Indentation
-\parindent 0pt
-\parskip 12pt
+\ifdefined\layoutletter
+\else
+  % Standard: no Indentation
+  \parindent 0pt
+  \parskip 12pt
+\fi
 
 \ifdefined\layoutindent
 \ifdefined\layoutdoublespacing
@@ -132,3 +135,29 @@ Fach: Philosophie
 \fi
 
 \pagenumbering{arabic}
+
+\ifdefined\layoutletter
+\LoadLetterOption{DIN} %% oder: DINmtext, SN, SNleft, KOMAold.
+\makeatletter
+\@setplength{firstheadvpos}{20mm}
+\@setplength{firstheadwidth}{\paperwidth}
+\ifdim \useplength{toaddrhpos}>\z@
+  \@addtoplength[-2]{firstheadwidth}{\useplength{toaddrhpos}}
+\else
+  \@addtoplength[2]{firstheadwidth}{\useplength{toaddrhpos}}
+\fi
+\@setplength{foldmarkhpos}{6.5mm}
+\makeatother
+\setkomavar{fromname}{\autor}
+\setkomavar{fromaddress}{\adresse}
+\setkomavar{backaddressseparator}{ · }
+\setkomavar{signature}{\autor}
+\firsthead{}
+%\setkomavar{place}{Ort}
+%\setkomavar{placeseparator}{, den }
+\setkomavar{date}{\today}
+\pagestyle{plain}%% keine Header in der Kopfzeile
+\begin{letter}{\an}
+\setkomavar{subject}{\betreff}
+\opening{\anrede}
+\fi
