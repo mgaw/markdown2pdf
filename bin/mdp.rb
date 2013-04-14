@@ -177,7 +177,7 @@ code_seqs = code_seqs.map do |seq|
              gsub("limn ", "{\\displaystyle \\lim_{n \\to \\infty}} ").
              gsub("limx ", "{\\displaystyle \\lim_{x \\to \\infty}} ").
              gsub("widxxetilxxxde", "widetilde")
-  all_text = all_text.gsub(seq, new_seq)
+  all_text = all_text.gsub(seq, new_seq) unless seq == "    "
 end
 
 all_text = all_text.gsub(" [^", "[^")
@@ -231,6 +231,8 @@ all_text = all_text.sub("\\noindent \\section{Einleitung}", "\\phantomsection\n\
 all_text = all_text.sub("\\section{Schluss}", "\\phantomsection\n\\section*{Schluss}\n\\addcontentsline{toc}{section}{Schluss}")
 all_text = all_text.sub("\\section{Fazit}", "\\phantomsection\n\\section*{Fazit}\n\\addcontentsline{toc}{section}{Fazit}")
 all_text = all_text.gsub("\\end{quote}\n", "\\end{quote}")
+
+all_text = all_text.gsub "enumerate", "compactenum"
 
 # "Bla.. " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...

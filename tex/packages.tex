@@ -38,7 +38,11 @@
   \setkomafont{backaddress}{\mdseries}
   \usepackage[bottom=2cm]{geometry}
 \else
-  \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+  \ifdefined\layoutthesenpapier
+    \usepackage[top=2cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
+  \else
+    \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+  \fi
 
   \usepackage[sort&compress]{natbib}
   \bibpunct{(}{)}{;}{a}{}{,}
@@ -56,6 +60,17 @@
   \renewcommand{\cftsecfont}{\normalfont}
   \renewcommand{\cftsubsecfont}{\itshape}
   \tocloftpagestyle{empty}
+\fi
+
+\ifdefined\layoutthesenpapier
+  \usepackage{paralist}
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{6pt}
+  \setlength{\plpartopsep}{12pt}
+  \setlength{\pltopsep}{0pt}
+  \setlength{\plitemsep}{6pt}
+  \defaultleftmargin{21pt}{24pt}{6pt}{6pt}
+  \pagestyle{empty}
 \fi
 
 \newcommand{\smallsmatrix}[1]{\begin{smallmatrix}#1\end{smallmatrix}}
