@@ -38,14 +38,7 @@ lines = lines.insert(lines.index("\n"),
 # strip header
 (0..lines.index("\n")).each { |i| lines[i] = lines[i].gsub(/  +/, " ").strip + "\n" }
 
-all_text = lines.join
-re = /  .*?  /m
-code_seqs = all_text.scan re
-code_seqs = code_seqs.map do |seq|
-  new_seq = " \\\\\\(" + seq.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\\\) " # hui.
-
-  # Meine Spezial-Ersezungen
-  new_seq = new_seq.
+all_text = lines.join.
              gsub("φ", "varphi").
              gsub("π", "pi").
              gsub("ε", "varepsilon").
@@ -67,12 +60,19 @@ code_seqs = code_seqs.map do |seq|
              gsub("Lös", "Los").
              gsub("lim_{", "displaystyle lim_{")
 
-  # durchgehen, jede sequenz von 2+ lateinischen buchstaben mit \\ prefixen
-  new_seq = new_seq.gsub(/([a-zA-Zäöü]{2,})(?![^{}]*})/, "\\\\\\&")
+start = all_text.index "  "
+while start
+  stop = all_text.index "  ", start + 2
+  break unless stop
 
+  str = all_text[start..stop + 1]
+  str = " \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) " # hui.
+  str = str.gsub /([a-zA-Zäöü]{2,})/, "\\\\\\&"
   # TODO: backslashes in \text{..} rausnehmen
+  str = str.gsub /text{.*?}/, "text{}"
+  all_text[start..stop + 1] = str
 
-  all_text = all_text.gsub(seq, new_seq) unless seq == "    "
+  start = all_text.index "  ", start
 end
 
 all_text = all_text.gsub(" [^", "[^")
