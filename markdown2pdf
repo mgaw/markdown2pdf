@@ -38,145 +38,40 @@ lines = lines.insert(lines.index("\n"),
 # strip header
 (0..lines.index("\n")).each { |i| lines[i] = lines[i].gsub(/  +/, " ").strip + "\n" }
 
-# TODO: schöner machen, d.h. auslagern
 all_text = lines.join
 re = /  .*?  /m
 code_seqs = all_text.scan re
 code_seqs = code_seqs.map do |seq|
   new_seq = " \\\\\\(" + seq.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\\\) " # hui.
-  new_seq = new_seq. # TODO: Substitutions in extra file
-             gsub("ZZ", "\\mathbb{Z}").
-             gsub("RR", "\\mathbb{R}").
-             gsub("NN", "\\mathbb{N}").
-             gsub("QQ", "\\mathbb{Q}").
-             gsub("CC", "\\mathbb{C}").
-             gsub("FF", "\\mathbb{F}").
-             gsub("KK", "\\mathbb{K}").
-             gsub("PP", "\\mathcal{P}").
-             gsub("ggT", "\\text{ggT}").
-             gsub("ker", "\\text{ker}").
-             gsub("rang(", "\\text{rang(}").
-             gsub("Rang(", "\\text{Rang(}").
-             gsub("Lös(", "\\text{Lös(}").
-             gsub("Ker", "\\text{Ker}").
-             gsub("Bild", "\\text{Bild}").
-             gsub("sgn", "\\text{sgn}"). # TODO: die alle mit DeclareMathOperator
-             gsub("Hom", "\\text{Hom}").
-             gsub("Id", "\\text{Id}").
-             gsub("sup ", "\\text{sup }").
-             gsub("inf ", "\\text{inf }").
-             gsub("min ", "\\min ").
-             gsub("max ", "\\max ").
-             gsub("Re ", "\\text{Re } ").
-             gsub("Im ", "\\text{Im } ").
-             gsub("ord", "\\text{ord}").
-             gsub("sqrt", "\\sqrt").
-             gsub("smatrix{", "\\smallsmatrix{"). # use as "matrix{...}"
-             gsub("pm{", "\\smallpmatrix{"). # use as "matrix{...}"
-             gsub("vm{", "\\smallvmatrix{"). # use as "matrix{...}"
-             gsub("cap", "\\cap").
-             gsub("cup", "\\cup").
-             gsub("big\\cup", "\\bigcup").
-             gsub("big\\cap", "\\bigcap").
-             gsub("sigma", "\\sigma").
-             gsub("phi", "\\varphi").
-             gsub("psi", "\\psi").
-             gsub("Phi", "\\Phi").
-             gsub("alpha", "\\alpha").
-             gsub("beta", "\\beta").
-             gsub("delta", "\\delta").
-             gsub("lam", "\\lambda").
-             gsub("mü", "\\mu").
-             gsub("eps", "\\varepsilon").
-             gsub("φ", "\\varphi").
-             gsub("π", "\\pi").
-             gsub("pi", "\\pi").
-             gsub("theta", "\\theta").
-             gsub("ε", "\\varepsilon").
-             gsub("∂", "\\delta").
-             gsub("µ", "\\mu").
-             gsub("λ", "\\lambda").
-             gsub("∞", "\\infty").
-             gsub("ξ", "\\xi").
-             gsub("τ", "\\tau").
-             gsub("tau", "\\tau").
-             gsub("σ", "\\sigma").
-             gsub("<=>", " \\Leftrightarrow").
-             gsub("=>", " \\Rightarrow").
-             gsub("≤", "\\leq").
-             gsub("<=", "\\leq").
-             gsub("≥", "\\geq").
-             gsub(">=", "\\geq").
-             gsub(" not ", " \\not ").
-             gsub("varnothing", "\\varnothing").
-             gsub("+-", "\\pm").
-             gsub("±", "\\pm").
-             gsub("equiv", "\\equiv").
-             gsub("neq", "\\neq").
-             gsub(" mod ", " \\mod ").
-             gsub(" in ", " \\in ").
-             gsub(" mapsto ", " \\mapsto ").
-             gsub(" to ", " \\to ").
-             gsub(" simto ", " \\xrightarrow{\\sim} ").
-             gsub(" up ", " \\uparrow ").
-             gsub(" down ", " \\downarrow ").
-             gsub(" times ", " \\times ").
-             gsub(" setminus ", " \\setminus ").
-             gsub("infty", "\\infty").
-             gsub("forall", "\\forall").
-             gsub("exists", "\\exists").
-             gsub("overline", "\\overline").
-             gsub("span", "\\text{span}").
-             gsub("langle", "\\langle").
-             gsub("rangle", "\\rangle").
-             gsub("right|", "\\right|").
-             gsub("left|", "\\left|").
-             gsub("right)", "\\right)").
-             gsub("left(", "\\left(").
-             gsub("right\\}", "\\right\\}").
-             gsub("left\\{", "\\left\\{").
-             gsub("widetilde", "\\widxxetilxxxde").
-             gsub("tilde", "\\tilde").
-             gsub("unlhd", "\\unlhd").
-             gsub(" quad ", " \\quad ").
-             gsub("cdot", "\\cdot").
-             gsub("ddots", "\\ddots").
-             gsub("cdots", "\\cdots").
-             gsub("vdots", "\\vdots").
-             gsub("circ", "\\circ").
-             gsub("oplus", "\\oplus").
-             gsub("odot", "\\odot").
-             gsub("mapsto", "\\mapsto").
-             gsub("frac", "\\frac").
-             gsub("sum", "\\sum").
-             gsub("prod", "\\prod").
-             gsub("int", "\\int").
-             gsub("sin", "\\sin").
-             gsub("cos", "\\cos").
-             gsub("deg", "\\deg").
-             gsub("det", "\\det").
-             gsub("dim", "\\dim").
-             gsub("exp", "\\exp").
-             gsub("norm", "\\norm").
-             gsub("abs", "\\abs").
-             gsub("ln", "\\ln").
-             gsub("char(", "\\text{char}(").
-             gsub("Abb(", "\\text{Abb}(").
-             gsub("triangle", "\\triangle").
-             gsub("overset", "\\overset").
-             gsub("checkmark", "\\checkmark").
-             gsub("sim", "\\sim").
-             gsub("cong", "\\cong").
-             gsub(" sse ", " \\subseteq ").
-             gsub("supset", "\\supset").
-             gsub("subset", "\\subset").
-             gsub(" ssne ", " \\subsetneq ").
-             gsub("qed", " \\hfill\\square").
-             gsub("displaystyle", "\\displaystyle").
-             gsub("lim_{", "\\displaystyle \\lim_{").
-             gsub("limn ", "{\\displaystyle \\lim_{n \\to \\infty}} ").
-             gsub("limx ", "{\\displaystyle \\lim_{x \\to \\infty}} ").
-             gsub("widxxetilxxxde", "widetilde")
+
+  # Meine Spezial-Ersezungen
+  new_seq = new_seq.
+             gsub("φ", "varphi").
+             gsub("π", "pi").
+             gsub("ε", "varepsilon").
+             gsub("∂", "delta").
+             gsub("µ", "mu").
+             gsub("λ", "lambda").
+             gsub("∞", "infty").
+             gsub("ξ", "xi").
+             gsub("τ", "tau").
+             gsub("σ", "sigma").
+             gsub("<=>", "Leftrightarrow").
+             gsub("=>", "Rightarrow").
+             gsub("≤", "leq").
+             gsub("<=", "leq").
+             gsub("≥", "geq").
+             gsub(">=", "geq").
+             gsub("+-", "pm").
+             gsub("±", "pm").
+             gsub("Lös", "Los").
+             gsub("lim_{", "displaystyle lim_{")
+
+  # durchgehen, jede sequenz von 2+ lateinischen buchstaben mit \\ prefixen
+  new_seq = new_seq.gsub(/([a-zA-Zäöü]{2,})(?![^{}]*})/, "\\\\\\&")
+
+  # TODO: backslashes in \text{..} rausnehmen
+
   all_text = all_text.gsub(seq, new_seq) unless seq == "    "
 end
 
