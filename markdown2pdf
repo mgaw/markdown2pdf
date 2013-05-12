@@ -69,12 +69,14 @@ while start
   str = " \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) " # hui.
   str = str.gsub /([a-zA-Zäöü]{2,})/, "\\\\\\&"
   # TODO: backslashes in \text{..} rausnehmen
-  str = str.gsub /text{.*?}/, "text{}"
+  str = str.gsub /text{(.*?)}/, "text{#{($1 or "").gsub("\\", "")}}"
   all_text[start..stop + 1] = str
 
   start = all_text.index "  ", start
 end
 
+all_text = all_text.gsub("- $", "-$").
+                    gsub("$ -", "$-")
 all_text = all_text.gsub(" [^", "[^")
 
 file = File.new(base, "w")
