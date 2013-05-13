@@ -20,6 +20,7 @@ lines = lines.reject { |x| x =~ /^%/ } # lines beginning with % are comments
 # find_all deprecated?
 layout = (lines.find_all { |x| x =~ /^Layout: / }.first or "").chop.sub(/^Layout: /, "").strip
 # Bsp: "times doublespacing indent titlepage toc bibliography"
+# TODO vll umbennen zu "Options"/"Optionen"
 
 # determine if there are header fields.
 unless lines[0] =~ /^[a-zA-Z]+:\s*\S+.*/
@@ -60,6 +61,7 @@ all_text = lines.join.
              gsub("Lös", "Los").
              gsub("lim_{", "displaystyle lim_{")
 
+# TODO Spaces für Listen irgendwie ignorieren
 start = all_text.index "  "
 while start
   stop = all_text.index "  ", start + 2
@@ -67,8 +69,9 @@ while start
 
   str = all_text[start..stop + 1]
   str = " \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) " # hui.
-  str = str.gsub /([a-zA-Zäöü]{2,})/, "\\\\\\&"
-  # TODO: backslashes in \text{..} rausnehmen
+  # TODO Falls alleine in Zeile \\[ ... \\] verwenden
+  str = str.gsub /([a-zA-Zäöü]{2,})/, "\\\\\\&" # TODO das hier von Options abhängig machen
+  # TODO backslashes in \text{..} rausnehmen
   str = str.gsub /text{(.*?)}/, "text{#{($1 or "").gsub("\\", "")}}"
   all_text[start..stop + 1] = str
 
