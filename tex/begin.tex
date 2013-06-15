@@ -11,7 +11,7 @@
 
 \ifdefined\layouttinyheader
 \begin{small}
-\noindent \meta \\ \autor\ (\matrikelnummer, \email)
+\noindent \meta \\ \autor\ (\matrikelnummer, \email) \\ \datum
 \end{small}
 \vspace{0.5cm}
 \fi
@@ -178,4 +178,14 @@ Fach: Philosophie
 \begin{center}
 \Large\titel
 \end{center}
+\fi
+
+\ifdefined\layoutlogik
+VL \quad\textls*[200]{\MakeUppercase{\vorlesung}} \hfill \semester
+\vskip -0.2cm
+\textbf{\blatt \hfill \meta}
+
+\hrule
+
+\vskip 0.5cm
 \fi

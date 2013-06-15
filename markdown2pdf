@@ -39,7 +39,16 @@ lines = lines.insert(lines.index("\n"),
 # strip header
 (0..lines.index("\n")).each { |i| lines[i] = lines[i].gsub(/  +/, " ").strip + "\n" }
 
-all_text = lines.join.
+all_text = lines.join
+
+# TODO Spaces für Listen irgendwie ignorieren
+start = all_text.index "  "
+while start
+  stop = all_text.index "  ", start + 2
+  break unless stop
+
+  str = all_text[start..stop + 1]
+  str = str.
              gsub("φ", "varphi").
              gsub("π", "pi").
              gsub("ε", "varepsilon").
@@ -50,6 +59,8 @@ all_text = lines.join.
              gsub("ξ", "xi").
              gsub("τ", "tau").
              gsub("σ", "sigma").
+             gsub("<->", "leftrightarrow").
+             gsub("->", "rightarrow").
              gsub("<=>", "Leftrightarrow").
              gsub("=>", "Rightarrow").
              gsub("≤", "leq").
@@ -59,20 +70,21 @@ all_text = lines.join.
              gsub("+-", "pm").
              gsub("±", "pm").
              gsub("Lös", "Los").
-             gsub("lim_{", "displaystyle lim_{")
+             gsub("lim_{", "displaystyle lim_{").
+             gsub("´", " textrm'")
 
-# TODO Spaces für Listen irgendwie ignorieren
-start = all_text.index "  "
-while start
-  stop = all_text.index "  ", start + 2
-  break unless stop
+  # TODO Auch EOL als schließendes "  " zulassen
+  # TODO /\W{.*?}/ -> \{...\}
 
-  str = all_text[start..stop + 1]
-  str = " \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) " # hui.
+  if all_text[start - 1] == "\n" && all_text[stop + 2] == "\n"
+    str = " \\\\[" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\] " # hui.
+  else
+    str = " \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) " # hui.
+  end
   # TODO Falls alleine in Zeile \\[ ... \\] verwenden
-  str = str.gsub /([a-zA-Zäöü]{2,})/, "\\\\\\&" # TODO das hier von Options abhängig machen
-  # TODO backslashes in \text{..} rausnehmen
-  str = str.gsub /text{(.*?)}/, "text{#{($1 or "").gsub("\\", "")}}"
+  str = str.gsub /([a-zA-Z]{2,})/, "\\\\\\&" # TODO das hier von Options abhängig machen
+  str.scan(/text{(.*?)}/).flatten.
+      each { |match| str.gsub! "text{#{match}}", "text{#{match.gsub("\\", "")}}"}
   all_text[start..stop + 1] = str
 
   start = all_text.index "  ", start
@@ -85,7 +97,7 @@ all_text = all_text.gsub(" [^", "[^")
 file = File.new(base, "w")
 file.write(all_text)
 file.close
- 
+
 `multimarkdown --to=latex --output="#{baseless}.tex" "#{baseless}.md"`
 
 lines = File.readlines(baseless + ".tex")
@@ -98,6 +110,7 @@ end
   # replace in lines that start with \def: \textbackslash{}, \{, \}
   if lines[i] =~ /^\\def.*$/ or lines[i] =~ /^\\.*$/
     lines[i] = lines[i].gsub(/\\textbackslash\{\}/, "\\").
+                        gsub("--", "-").
                         gsub(/\\\{/, "{").
                         gsub(/\\\}/, "}")
   end
@@ -108,31 +121,34 @@ end
   end
 
   # replace strange chars
-  lines[i] = lines[i].gsub(" ", " ") # <A-Space>, &nbsp;
-  lines[i] = lines[i].gsub(" ", " ") # aus MacWord-PDF kopiert
-  lines[i] = lines[i].gsub("ü", "ü")
-  lines[i] = lines[i].gsub("ö", "ö")
-  lines[i] = lines[i].gsub("ä", "ä")
+  lines[i] = lines[i].gsub " ", " " # <A-Space>, &nbsp;
+  lines[i] = lines[i].gsub " ", " " # aus MacWord-PDF kopiert
+  lines[i] = lines[i].gsub "ü", "ü"
+  lines[i] = lines[i].gsub "ö", "ö"
+  lines[i] = lines[i].gsub "ä", "ä"
 
   # workaround ?``: just replace all closing quotes.
-  lines[i] = lines[i].gsub("``", "“")
+  lines[i] = lines[i].gsub "``", "“"
   # nach den doppelten auch die einfachen
-  lines[i] = lines[i].gsub("`", "{‘}")
+  lines[i] = lines[i].gsub "`", "{‘}"
   # ellipsis
-  lines[i] = lines[i].gsub("...", "\\dots")
+  lines[i] = lines[i].gsub "...", "\\dots"
 end
 
 all_text = lines.join
 # never indent first line
-all_text = all_text.sub("\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent ")
+all_text = all_text.sub "\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent "
+
+all_text = all_text.gsub "\\\\\\\\", "\\\\\\"
 
 # no number for Einleitung und Schluss/Fazit
-all_text = all_text.sub("\\noindent \\section{Einleitung}", "\\phantomsection\n\\section*{Einleitung}\n\\addcontentsline{toc}{section}{Einleitung}")
-all_text = all_text.sub("\\section{Schluss}", "\\phantomsection\n\\section*{Schluss}\n\\addcontentsline{toc}{section}{Schluss}")
-all_text = all_text.sub("\\section{Fazit}", "\\phantomsection\n\\section*{Fazit}\n\\addcontentsline{toc}{section}{Fazit}")
-all_text = all_text.gsub("\\end{quote}\n", "\\end{quote}")
+all_text = all_text.sub "\\noindent \\section{Einleitung}", "\\phantomsection\n\\section*{Einleitung}\n\\addcontentsline{toc}{section}{Einleitung}"
+all_text = all_text.sub "\\section{Schluss}", "\\phantomsection\n\\section*{Schluss}\n\\addcontentsline{toc}{section}{Schluss}"
+all_text = all_text.sub "\\section{Fazit}", "\\phantomsection\n\\section*{Fazit}\n\\addcontentsline{toc}{section}{Fazit}"
+all_text = all_text.gsub "\\end{quote}\n", "\\end{quote}"
 
 all_text = all_text.gsub "enumerate", "compactenum"
+all_text = all_text.gsub "itemize", "compactitem"
 
 # "Bla.. " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...
@@ -143,10 +159,10 @@ all_text = all_text.gsub("...", "#BLATEXT#").
                     gsub("..$ ", "$.\\quad ").
                     gsub("#BLATEXT#", "...")
 
-file = File.new(baseless + ".tex", "w")
-file.write(all_text)
+file = File.new baseless + ".tex", "w"
+file.write all_text
 file.close
- 
+
 `pdflatex "#{baseless}"`
 
 # TODO Feld "HelperFiles: ", wo man dateinamen angibt, die im selben pfad liegen, die irgendwie strukturierte bibliographie-daten enthalten, die in eine .bib(?)-Datei geschrieben werden

@@ -20,13 +20,13 @@
 \usepackage{amssymb}
 \usepackage{mathdots}
 \usepackage{rotating} % for \Lor
-\usepackage{eucal} % more pretty power set
 \usepackage{microtype}
 \usepackage[pdftex]{hyperref}
 
 \ifdefined\layoutcm % computer modern
 \else
   \usepackage{mathptmx}
+  \usepackage{eucal} % more pretty power set in times font
 \fi
 
 \renewenvironment{quote}{\list{}{\leftmargin=2em\rightmargin=2em\small}\item[]}{\endlist}
@@ -62,6 +62,15 @@
   \renewcommand{\cftsecfont}{\normalfont}
   \renewcommand{\cftsubsecfont}{\itshape}
   \tocloftpagestyle{empty}
+\fi
+
+\ifdefined\layoutcompact
+  \usepackage{paralist}
+  %\setlength{\plpartopsep}{12pt}
+  \setlength{\pltopsep}{0pt}
+  \setlength{\plitemsep}{6pt}
+  %\defaultleftmargin{21pt}{24pt}{6pt}{6pt}
+  \pagestyle{empty}
 \fi
 
 \ifdefined\layoutthesenpapier
