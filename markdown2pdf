@@ -48,40 +48,39 @@ while start
   break unless stop
 
   str = all_text[start..stop + 1]
-  str = str.
-             gsub("φ", "varphi").
-             gsub("π", "pi").
-             gsub("ε", "varepsilon").
-             gsub("∂", "delta").
-             gsub("µ", "mu").
-             gsub("λ", "lambda").
-             gsub("∞", "infty").
-             gsub("ξ", "xi").
-             gsub("τ", "tau").
-             gsub("σ", "sigma").
-             gsub("<->", "leftrightarrow").
-             gsub("->", "rightarrow").
-             gsub("<=>", "Leftrightarrow").
-             gsub("=>", "Rightarrow").
-             gsub("≤", "leq").
-             gsub("<=", "leq").
-             gsub("≥", "geq").
-             gsub(">=", "geq").
-             gsub("+-", "pm").
-             gsub("±", "pm").
-             gsub("Lös", "Los").
-             gsub("lim_{", "displaystyle lim_{").
-             gsub("´", " textrm'")
+  str = str.gsub("φ", "varphi").
+            gsub("π", "pi").
+            gsub("ε", "varepsilon").
+            gsub("∂", "delta").
+            gsub("µ", "mu").
+            gsub("λ", "lambda").
+            gsub("∞", "infty").
+            gsub("ξ", "xi").
+            gsub("τ", "tau").
+            gsub("σ", "sigma").
+            gsub("<->", "leftrightarrow").
+            gsub("->", "rightarrow").
+            gsub("<=>", "Leftrightarrow").
+            gsub("=>", "Rightarrow").
+            gsub("≤", "leq").
+            gsub("<=", "leq").
+            gsub("≥", "geq").
+            gsub(">=", "geq").
+            gsub("+-", "pm").
+            gsub("±", "pm").
+            gsub("Lös", "Los").
+            gsub("lim_{", "displaystyle lim_{").
+            gsub("´", " textrm'")
 
   # TODO Auch EOL als schließendes "  " zulassen
-  # TODO /\W{.*?}/ -> \{...\}
+  # TODO /\W{.*?}/ -> \{...\} für Mengen.
 
   if all_text[start - 1] == "\n" && all_text[stop + 2] == "\n"
     str = " \\\\[" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\] " # hui.
   else
     str = " \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) " # hui.
   end
-  # TODO Falls alleine in Zeile \\[ ... \\] verwenden
+  # TODO nicht, wenn \ davor steht
   str = str.gsub /([a-zA-Z]{2,})/, "\\\\\\&" # TODO das hier von Options abhängig machen
   str.scan(/text{(.*?)}/).flatten.
       each { |match| str.gsub! "text{#{match}}", "text{#{match.gsub("\\", "")}}"}
@@ -113,11 +112,6 @@ end
                         gsub("--", "-").
                         gsub(/\\\{/, "{").
                         gsub(/\\\}/, "}")
-  end
-
-  # pagebreaks
-  if lines[i] == "pagebreak\n" or lines[i] == "header\n"
-    lines[i] = "\\" + lines[i]
   end
 
   # replace strange chars
