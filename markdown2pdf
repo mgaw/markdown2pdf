@@ -151,6 +151,8 @@ all_text = all_text.gsub "itemize", "compactitem"
 all_text = all_text.gsub("...", "#BLATEXT#").
                     gsub(".. ", ".\\quad ").
                     gsub("..$ ", "$.\\quad ").
+                    gsub(":: ", ":\\quad ").
+                    gsub("::$ ", "$:\\quad ").
                     gsub("#BLATEXT#", "...")
 
 file = File.new baseless + ".tex", "w"
