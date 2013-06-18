@@ -66,6 +66,7 @@ while start
             gsub("<=", "leq").
             gsub("≥", "geq").
             gsub(">=", "geq").
+            gsub("!=", "neq").
             gsub("+-", "pm").
             gsub("±", "pm").
             gsub("Lös", "Los").
