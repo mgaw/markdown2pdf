@@ -142,7 +142,8 @@ all_text = all_text.sub "\\section{Schluss}", "\\phantomsection\n\\section*{Schl
 all_text = all_text.sub "\\section{Fazit}", "\\phantomsection\n\\section*{Fazit}\n\\addcontentsline{toc}{section}{Fazit}"
 all_text = all_text.gsub "\\end{quote}\n", "\\end{quote}"
 
-all_text = all_text.gsub "enumerate", "compactenum"
+all_text = all_text.gsub "begin{enumerate}", "begin{compactenum}[\\; a)]" # TODO !!
+all_text = all_text.gsub "end{enumerate}", "end{compactenum}"
 all_text = all_text.gsub "itemize", "compactitem"
 
 # "Bla.. " ersetzen
