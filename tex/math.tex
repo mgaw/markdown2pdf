@@ -7,25 +7,25 @@
 \newcommand{\KK}{\mathbb{K}}
 \newcommand{\PP}{\mathcal{P}}
 \newcommand{\ggT}{\text{ggT}}
-\renewcommand{\ker}{\text{ker}} %TODO: nicht nötig?
-\newcommand{\rang}{\text{rang}}
-\newcommand{\Rang}{\text{Rang}}
-\newcommand{\Los}{\text{Lös}}
-\newcommand{\Ker}{\text{Ker}}
-\newcommand{\Bild}{\text{Bild}}
-\newcommand{\sgn}{\text{sgn}} % TODO: die alle mit DeclareMathOperator
-\newcommand{\Hom}{\text{Hom}}
-\newcommand{\Id}{\text{Id}}
-\renewcommand{\Re}{\text{Re }}
-\renewcommand{\Im}{\text{Im }}
-\newcommand{\ord}{\text{ord}}
+\DeclareMathOperator{\rang}{rang}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\Rang}{Rang}
+\DeclareMathOperator{\Los}{Lös}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Id}{Id}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\ord}{ord}
 \renewcommand{\phi}{\varphi}
 \newcommand{\lam}{\lambda}
 \newcommand{\eps}{\varepsilon}
-\newcommand{\simto}{\xrightarrow{\\sim}}
+\newcommand{\simto}{\xrightarrow{\sim}}
 \newcommand{\up}{\uparrow}
 \newcommand{\down}{\downarrow}
-\renewcommand{\span}{\text{span}}
+\renewcommand{\span}{\text{span}} % http://tex.stackexchange.com/q/33264
 \renewcommand{\char}{\text{char}}
 \newcommand{\Abb}{\text{Abb}}
 \newcommand{\sse}{\subseteq}
@@ -40,7 +40,7 @@
 \providecommand{\abs}[1]{\lvert#1\rvert}
 \providecommand{\norm}[1]{\lVert#1\rVert}
 
-\newcommand{\Wert}{\text{Wert}}
+\DeclareMathOperator{\Wert}{Wert}
 \newcommand{\SKLAL}{\mathcal{SK}_{\mathcal{L}_\text{AL}}}
 \newcommand{\FmLAL}{\mathcal{F}m_{\mathcal{L}_\text{AL}}}
 

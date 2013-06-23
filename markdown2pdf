@@ -61,6 +61,7 @@ while start
             gsub("<->", "leftrightarrow").
             gsub("->", "rightarrow").
             gsub("<=>", "Leftrightarrow").
+            gsub("<==>", "quad Leftrightarrow quad").
             gsub("=>", "Rightarrow").
             gsub("≤", "leq").
             gsub("<=", "leq").
@@ -90,8 +91,6 @@ while start
   start = all_text.index "  ", start
 end
 
-all_text = all_text.gsub("- $", "-$").
-                    gsub("$ -", "$-")
 all_text = all_text.gsub(" [^", "[^")
 
 file = File.new(base, "w")
@@ -133,6 +132,8 @@ end
 all_text = lines.join
 # never indent first line
 all_text = all_text.sub "\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent "
+all_text = all_text.gsub("- $", "-$").
+                    gsub("$ -", "$-")
 
 all_text = all_text.gsub "\\\\\\\\", "\\\\\\"
 
@@ -155,6 +156,7 @@ all_text = all_text.gsub("...", "#BLATEXT#").
                     gsub("..$ ", "$.\\quad ").
                     gsub(":: ", ":\\quad ").
                     gsub("::$ ", "$:\\quad ").
+                    gsub(",, ", ",\\; ").
                     gsub("#BLATEXT#", "...")
 
 file = File.new baseless + ".tex", "w"
