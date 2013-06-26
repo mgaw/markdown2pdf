@@ -70,6 +70,7 @@ while start
             gsub("!=", "neq").
             gsub("+-", "pm").
             gsub("±", "pm").
+            gsub("·", "cdot").
             gsub("Lös", "Los").
             gsub("lim_{", "displaystyle lim_{").
             gsub("´", " textrm'")
