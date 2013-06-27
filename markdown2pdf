@@ -44,6 +44,9 @@ all_text = lines.join
 # TODO Spaces für Listen irgendwie ignorieren
 start = all_text.index "  "
 while start
+  #stop1 = all_text.index "  ", start + 2
+  #stop2 = all_text.index "\n", start + 2
+  #stop = [stop1, stop2].min
   stop = all_text.index "  ", start + 2
   break unless stop
 
@@ -147,6 +150,8 @@ all_text = all_text.gsub "\\end{quote}\n", "\\end{quote}"
 all_text = all_text.gsub "begin{enumerate}", "begin{compactenum}[\\; a)]" # TODO !!
 all_text = all_text.gsub "end{enumerate}", "end{compactenum}"
 all_text = all_text.gsub "itemize", "compactitem"
+all_text.gsub! "\\[", "\\begin{align*}\n"
+all_text.gsub! "\\]", "\n\\end{align*}"
 
 # "Bla.. " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...

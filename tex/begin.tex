@@ -181,6 +181,14 @@ Fach: Philosophie
 \fi
 
 \ifdefined\layoutlogik
+  \pagestyle{empty}
+\fi
+
+\ifdefined\layoutlogik
+  %\abovedisplayshortskip=-13pt
+  %\belowdisplayshortskip=0pt
+  \abovedisplayskip=-17pt
+  \belowdisplayskip=0pt
 VL \quad\textls*[200]{\MakeUppercase{\vorlesung}} \hfill \semester
 \vskip -0.2cm
 \textbf{\blatt \hfill \meta}
