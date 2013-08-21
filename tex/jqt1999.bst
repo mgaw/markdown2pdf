@@ -109,13 +109,13 @@ FUNCTION {output.nonnull}
   output.state mid.sentence =
     { ", " * write$ }
     { output.state after.block =
-	{ add.period$ write$
+	{ ", " * write$
 	  newline$
 	  "\newblock " write$
 	}
 	{ output.state before.all =
 	    'write$
-	    { add.period$ " " * write$ }
+	    { ", " * write$ }
 	  if$
 	}
       if$
@@ -467,8 +467,8 @@ FUNCTION {format.in.ed.booktitle}
 { booktitle empty$
     { "" }
     { editor empty$
-	{ "In " booktitle emphasize * }
-	{ "In " format.editors * ", " * booktitle emphasize * }
+	{ "in " booktitle emphasize * }
+	{ "in " format.editors * ", " * booktitle emphasize * }
       if$
     }
   if$

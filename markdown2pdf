@@ -39,7 +39,12 @@ lines = lines.insert(lines.index("\n"),
 # strip header
 (0..lines.index("\n")).each { |i| lines[i] = lines[i].gsub(/  +/, " ").strip + "\n" }
 
-all_text = lines.join
+# remove bib
+first_bib_line = lines.index "# Literatur\n"
+
+# + 2 wegen "# Literatur" soll nicht mehr drinstehen
+bib_text = lines[(first_bib_line + 2)...lines.length].join
+all_text = lines[0...first_bib_line].join
 
 # TODO Spaces für Listen irgendwie ignorieren
 start = all_text.index "  "
@@ -99,6 +104,10 @@ all_text = all_text.gsub(" [^", "[^")
 
 file = File.new(base, "w")
 file.write(all_text)
+file.close
+
+file = File.new(baseless + ".bib", "w")
+file.write(bib_text)
 file.close
 
 `multimarkdown --to=latex --output="#{baseless}.tex" "#{baseless}.md"`
