@@ -23,6 +23,7 @@
 \usepackage{microtype}
 \usepackage[pdftex]{hyperref}
 \usepackage{paralist}
+%\usepackage[stable]{footmisc} % for footnotes in \section{}s
 
 \ifdefined\layoutcm % computer modern
 \else
@@ -51,7 +52,9 @@
   \bibpunct{(}{)}{;}{a}{}{,}
 
   \usepackage{titlesec}
-  \titleformat{\section}{\singlespacing\normalfont\bfseries\Large}{}{0em}{}
+  %\renewcommand{\thesection}{\Roman{section}}
+  \titleformat{\section}{\singlespacing\normalfont\bfseries\Large}{\thesection.}{0.5em}{}
+  %\titleformat{\subsection}{\singlespacing\normalfont\bfseries\large}{\thesubsection}{0.5em}{}
   \titleformat{\subsection}{\singlespacing\normalsize\itshape}{}{0em}{}
 
   \usepackage{tocloft}
