@@ -32,6 +32,7 @@ lines = lines.insert(0,
   "LatexInput: tex/default-values\n")
 lines = lines.insert(lines.index("\n"),
   "QuotesLanguage: german\n",
+  "Bibtex: #{baseless}\n",
   "BaseHeaderLevel: 3\n",
   "LatexInput: tex/begin\n",
   "LatexFooter: tex/footer\n")
