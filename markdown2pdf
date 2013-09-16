@@ -182,4 +182,6 @@ file.close
 
 `pdflatex "#{baseless}"`
 
+`cp "#{baseless}.pdf" /u/gawrisch/public_html` if File.exists? "/u/gawrisch/public_html"
+
 # TODO Feld "HelperFiles: ", wo man dateinamen angibt, die im selben pfad liegen, die irgendwie strukturierte bibliographie-daten enthalten, die in eine .bib(?)-Datei geschrieben werden
