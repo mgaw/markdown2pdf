@@ -11,6 +11,7 @@ Dir.chdir dir
 
 if base.sub(baseless, "") == ".tex"
   `pdflatex "#{baseless}"`
+  `cp "#{baseless}.pdf" /u/gawrisch/public_html` if File.exists? "/u/gawrisch/public_html"
   exit
 end
 
@@ -42,9 +43,10 @@ lines = lines.insert(lines.index("\n"),
 
 # remove bib
 first_bib_line = lines.index "# Literatur\n"
+first_bib_line ||= lines.length
 
 # + 2 wegen "# Literatur" soll nicht mehr drinstehen
-bib_text = lines[(first_bib_line + 2)...lines.length].join
+bib_text = (lines[(first_bib_line + 2)...lines.length] or []).join
 all_text = lines[0...first_bib_line].join
 
 # TODO Spaces für Listen irgendwie ignorieren
@@ -145,7 +147,7 @@ end
 
 all_text = lines.join
 # never indent first line
-all_text = all_text.sub "\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent "
+#all_text = all_text.sub "\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent "
 all_text = all_text.gsub("- $", "-$").
                     gsub("$ -", "$-")
 

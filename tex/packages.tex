@@ -6,7 +6,7 @@
   \ifdefined\layouttwelvept
     \documentclass[a4paper, 12pt, bibtotoc]{scrartcl}
   \else
-    \documentclass[a4paper, 11pt, bibtotoc]{scrartcl}
+    \documentclass[twocolumn, paper=a4, fontsize=9pt]{scrartcl}
   \fi
 \fi
 
@@ -45,18 +45,23 @@
   \ifdefined\layoutthesenpapier
     \usepackage[top=2cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
   \else
-    \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+    %\usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+    \usepackage[top=0.6cm, bottom=0.6cm, left=0.6cm, right=0.8cm]{geometry}
   \fi
 
   \usepackage[sort&compress]{natbib}
   \bibpunct{(}{)}{;}{a}{}{,}
 
-  \usepackage{titlesec}
-  %\renewcommand{\thesection}{\Roman{section}}
-  \titleformat{\section}{\singlespacing\normalfont\Large}{\thesection.}{0.5em}{}
-  %\titleformat{\subsection}{\singlespacing\normalfont\bfseries\large}{\thesubsection}{0.5em}{}
-  %\titleformat{\subsection}{\singlespacing\normalsize\itshape}{}{0em}{}
-  \titleformat{\subsection}{\singlespacing\normalsize\itshape}{\thesubsection}{0.5em}{}
+  \ifdefined\layoutstd
+    % we don't want fancy sections
+  \else
+    \usepackage{titlesec}
+    %\renewcommand{\thesection}{\Roman{section}}
+    \titleformat{\section}{\singlespacing\normalfont\Large}{\thesection.}{0.5em}{}
+    %\titleformat{\subsection}{\singlespacing\normalfont\bfseries\large}{\thesubsection}{0.5em}{}
+    %\titleformat{\subsection}{\singlespacing\normalsize\itshape}{}{0em}{}
+    \titleformat{\subsection}{\singlespacing\normalsize\itshape}{\thesubsection}{0.5em}{}
+  \fi
 
   \usepackage{tocloft}
   \renewcommand{\cfttoctitlefont}{\hfill\normalfont\bfseries\large}
