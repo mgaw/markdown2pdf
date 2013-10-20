@@ -6,7 +6,11 @@
   \ifdefined\layouttwelvept
     \documentclass[a4paper, 12pt, bibtotoc]{scrartcl}
   \else
-    \documentclass[twocolumn, paper=a4, fontsize=9pt]{scrartcl}
+    \ifdefined\layoutsmall
+      \documentclass[twocolumn, paper=a4, fontsize=9pt]{scrartcl}
+    \else
+      \documentclass[paper=a4, fontsize=11pt, bibtotoc]{scrartcl}
+    \fi
   \fi
 \fi
 
@@ -45,8 +49,11 @@
   \ifdefined\layoutthesenpapier
     \usepackage[top=2cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
   \else
-    %\usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
-    \usepackage[top=0.6cm, bottom=0.6cm, left=0.6cm, right=0.8cm]{geometry}
+    \ifdefined\layoutsmall
+      \usepackage[top=0.6cm, bottom=0.6cm, left=0.6cm, right=0.8cm]{geometry}
+    \else
+      \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+    \fi
   \fi
 
   \usepackage[sort&compress]{natbib}
