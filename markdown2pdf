@@ -150,7 +150,7 @@ end
 
 all_text = lines.join
 # never indent first line
-#all_text = all_text.sub "\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent "
+all_text = all_text.sub "\\input{tex/begin}\n", "\\input{tex/begin}\n\\noindent "
 all_text = all_text.gsub("- $", "-$").
                     gsub("$ -", "$-")
 
