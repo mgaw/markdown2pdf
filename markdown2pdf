@@ -70,6 +70,9 @@ while start
             gsub("τ", "tau").
             gsub("σ", "sigma").
             gsub("<->", "leftrightarrow").
+            gsub("|--", "vdash").
+            gsub("<-->", "enspace leftrightarrow enspace").
+            gsub("-->", "enspace rightarrow enspace").
             gsub("->", "rightarrow").
             gsub("<=>", "Leftrightarrow").
             gsub("<==>", "quad Leftrightarrow quad").
@@ -90,7 +93,7 @@ while start
   # TODO /\W{.*?}/ -> \{...\} für Mengen.
 
   if all_text[start - 1] == "\n" && all_text[stop + 2] == "\n"
-    str = " \\\\[" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\] " # hui.
+    str = "beginalign \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) endalign" # hui.
   else
     str = " \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) " # hui.
   end
@@ -165,6 +168,9 @@ all_text = all_text.gsub "end{enumerate}", "end{compactenum}"
 all_text = all_text.gsub "itemize", "compactitem"
 all_text.gsub! "\\[", "\\begin{align*}\n"
 all_text.gsub! "\\]", "\n\\end{align*}"
+
+all_text.gsub!("\\beginalign $", "\\vspace{-2.3em}\\begin{align*}\n")
+all_text.gsub!("$ \\endalign", "\n\\end{align*}\\vspace{-2.4em}")
 
 # "Bla.. " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...
