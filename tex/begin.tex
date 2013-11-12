@@ -16,12 +16,41 @@
 \vspace{0.5cm}
 \fi
 
+\ifdefined\layoutnice
+\title{\titel\footnote{\meta. Matrikelnr.: \matrikelnummer, Email: \email.}}
+\author{\autor}
+\maketitle
+%\begin{center}
+%\begin{large}\titel\footnote{\meta}\end{large}
+%
+%\autor\footnote{Matrikelnr.: \matrikelnummer, Email: \email}
+%\end{center}
+%\vskip 0.1cm
+\newcommand{\layoutindent}{}
+\fi
+
+\ifdefined\layoutfnheader
+\title{\titel\footnote{\meta}}
+\author{\autor\footnote{Matrikelnr.: \matrikelnummer, Email: \email}}
+\maketitle
+%\begin{center}
+%\begin{large}\titel\footnote{\meta}\end{large}
+%
+%\autor\footnote{Matrikelnr.: \matrikelnummer, Email: \email}
+%\end{center}
+%\vskip 0.1cm
+\fi
+
 \ifdefined\layoutsmallheader
 \begin{small}
-\noindent \meta \\ \autor\ (\matrikelnummer, \email)
+\noindent \meta \\ \autor
+\ifdefined\layoutonlyname
+\else
+  \ (\matrikelnummer, \email)
+\fi
 \end{small}
 \vskip 0.8cm
-\begin{center}\begin{Large}\titel\end{Large}\end{center}
+\begin{center}\begin{large}\titel\end{large}\end{center}
 \vskip 0.1cm
 \fi
 
@@ -118,20 +147,20 @@ Fach: Philosophie
 \fi
 
 \ifdefined\layoutindent
-\ifdefined\layoutdoublespacing
-\parindent 2em
-\else
-\parindent 1.5em
-\fi
-\parskip 0pt
+  \ifdefined\layoutdoublespacing
+    \parindent 2em
+  \else
+    \parindent 1.5em
+  \fi
+  \parskip 0pt
 \fi
 
 \ifdefined\layoutonehalfspacing
-\onehalfspacing
+  \onehalfspacing
 \fi
 
 \ifdefined\layoutdoublespacing
-\doublespacing
+  \doublespacing
 \fi
 
 \pagenumbering{arabic}

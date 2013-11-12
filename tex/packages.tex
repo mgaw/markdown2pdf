@@ -9,7 +9,11 @@
     \ifdefined\layoutsmall
       \documentclass[twocolumn, paper=a4, fontsize=9pt]{scrartcl}
     \else
-      \documentclass[paper=a4, fontsize=11pt, bibtotoc]{scrartcl}
+      \ifdefined\layoutnice
+        \documentclass[paper=a4, fontsize=11pt, bibtotoc]{scrartcl}
+      \else
+        \documentclass[paper=a4, fontsize=11pt, bibtotoc]{scrartcl}
+      \fi
     \fi
   \fi
 \fi
@@ -52,7 +56,11 @@
     \ifdefined\layoutsmall
       \usepackage[top=0.6cm, bottom=0.6cm, left=0.6cm, right=0.8cm]{geometry}
     \else
-      \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+      \ifdefined\layoutnice
+        \usepackage[top=3cm, bottom=4cm, left=4cm, right=4cm]{geometry}
+      \else
+        \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+      \fi
     \fi
   \fi
 
