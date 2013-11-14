@@ -17,16 +17,23 @@
 \fi
 
 \ifdefined\layoutnice
-\title{\titel\footnote{\meta. Matrikelnr.: \matrikelnummer, Email: \email.}}
-\author{\autor}
-\maketitle
-%\begin{center}
-%\begin{large}\titel\footnote{\meta}\end{large}
-%
-%\autor\footnote{Matrikelnr.: \matrikelnummer, Email: \email}
-%\end{center}
-%\vskip 0.1cm
+%\title{\titel\footnote{\meta. Matrikelnummer: \matrikelnummer, E-Mail: \email. Eingereicht am \today.}}
+%\author{\autor}
+%\maketitle
+\quad
+
+\vspace{0.5cm}
+\renewcommand{\baselinestretch}{1.2}
+\noindent
+{% set colour and font for the title
+    \Large\textbf
+    %\sffamily\bfseries\Large\onehalfspacing
+    \titel\footnote{\meta, eingereicht am \today. Matrikelnummer: \matrikelnummer, E-Mail: \email.} \par}
+\vskip 0.5cm
+\noindent\emph{\autor}
+\vskip 1.5cm
 \newcommand{\layoutindent}{}
+\renewcommand{\baselinestretch}{1}
 \fi
 
 \ifdefined\layoutfnheader
@@ -150,7 +157,7 @@ Fach: Philosophie
   \ifdefined\layoutdoublespacing
     \parindent 2em
   \else
-    \parindent 1.5em
+    \parindent 1.1em
   \fi
   \parskip 0pt
 \fi
