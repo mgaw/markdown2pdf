@@ -15,6 +15,8 @@ if base.sub(baseless, "") == ".tex"
   exit
 end
 
+wordcount = `cat #{base} | wc -w | tr -d " "`
+puts wordcount
 lines = File.readlines(base)
 lines = lines.reject { |x| x =~ /^%/ } # lines beginning with % are comments
 
@@ -126,6 +128,8 @@ lines = File.readlines(baseless + ".tex")
 layout.split(" ").each do |str|
   lines.insert(0, "\\newcommand{\\layout#{str}}{}\n")
 end
+
+lines.insert(0, "\\newcommand{\\wordcount}{#{wordcount}}\n")
 
 (0...lines.length).each do |i|
   # replace in lines that start with \def: \textbackslash{}, \{, \}
