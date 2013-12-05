@@ -1,4 +1,6 @@
+\ifdefined\titel
 \hypersetup{pdftitle = \titel}
+\fi
 \ifdefined\layoutanon
 \hypersetup{pdfauthor = Anonymous}
 \else
@@ -17,6 +19,7 @@
 \fi
 
 \ifdefined\layoutnice
+\ifdefined\titel
 %\title{\titel\footnote{\meta. Matrikelnummer: \matrikelnummer, E-Mail: \email. Eingereicht am \today.}}
 %\author{\autor}
 %\maketitle
@@ -25,14 +28,17 @@
 \vspace{0.5cm}
 \renewcommand{\baselinestretch}{1.2}
 \noindent
-{% set colour and font for the title
-    \Large\textbf
-    %\sffamily\bfseries\Large\onehalfspacing
-    \titel\footnote{\titelfn} \par}
+\ifdefined\titelfn
+  {\Large\textbf \titel\footnote{\titelfn} \par}
+\else
+  {\Large\textbf \titel \par}
+\fi
 \vskip 0.5cm
 \noindent\emph{\autor}
 \vskip 1.5cm
+\fi
 \newcommand{\layoutindent}{}
+%\renewcommand{\baselinestretch}{1}
 \renewcommand{\baselinestretch}{1}
 \fi
 

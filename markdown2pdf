@@ -34,7 +34,7 @@ lines = lines.insert(0,
   "LatexInput: tex/packages\n",
   "LatexInput: tex/default-values\n")
 lines = lines.insert(lines.index("\n"),
-  "QuotesLanguage: german\n",
+#  "QuotesLanguage: german\n",
   "Bibtex: #{baseless}\n",
   "BaseHeaderLevel: 3\n",
   "LatexInput: tex/begin\n",
@@ -87,6 +87,7 @@ while start
             gsub("+-", "pm").
             gsub("±", "pm").
             gsub("·", "cdot").
+            gsub("^-1", "^{-1}").
             gsub("Lös", "Los").
             gsub("lim_{", "displaystyle lim_{").
             gsub("´", " textrm'")
