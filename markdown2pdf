@@ -15,8 +15,7 @@ if base.sub(baseless, "") == ".tex"
   exit
 end
 
-wordcount = `cat #{base} | wc -w | tr -d " "`
-puts wordcount
+wordcount = `cat #{base} | wc -w`.strip
 lines = File.readlines(base)
 lines = lines.reject { |x| x =~ /^%/ } # lines beginning with % are comments
 
