@@ -47,6 +47,8 @@
 \renewenvironment{quote}{\list{}{\leftmargin=2em\rightmargin=2em\small}\item[]}{\endlist}
 \expandafter\def\expandafter\quote\expandafter{\quote\vspace{-0.8em}\singlespacing}
 
+\newenvironment{defs}{\list{}{\leftmargin=1em\rightmargin=0em}\item[]\begin{compactitem}}{\end{compactitem}\endlist}
+
 \ifdefined\layoutletter
   \setkomafont{fromname}{\sffamily \LARGE}
   \setkomafont{fromaddress}{\sffamily}%% statt \small
