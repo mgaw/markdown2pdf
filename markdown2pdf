@@ -153,6 +153,15 @@ lines.insert(0, "\\newcommand{\\wordcount}{#{wordcount}}\n")
   lines[i] = lines[i].gsub "`", "{‘}"
   # ellipsis
   lines[i] = lines[i].gsub "...", "\\dots"
+
+  if lines[i] =~ /^(\S*?:) /
+    match = $1
+
+    lines[i] = "\\par\\vspace{0.6em}\n\\hangindent=2em\n\\hangafter=1\n\\noindent " + lines[i].sub(/^\S*?: /, "\\textbf{#{match}} \\;")
+
+    # assuming not working with linebreaks.
+    lines[i + 1] = "\n\\par\\vspace{0.6em}\\noindent "
+  end
 end
 
 all_text = lines.join
@@ -169,9 +178,9 @@ all_text = all_text.sub "\\section{Schluss}", "\\phantomsection\n\\section*{Schl
 all_text = all_text.sub "\\section{Fazit}", "\\phantomsection\n\\section*{Fazit}\n\\addcontentsline{toc}{section}{Fazit}"
 all_text = all_text.gsub "\\end{quote}\n", "\\end{quote}"
 
-all_text = all_text.gsub "begin{enumerate}", "begin{compactenum}"
+all_text = all_text.gsub "\\begin{enumerate}", "\\par\\vspace{0.6em}\n\\begin{compactenum}"
 #all_text = all_text.gsub "begin{enumerate}", "begin{compactenum}[\\; a)]" # TODO if logik
-all_text = all_text.gsub "end{enumerate}", "end{compactenum}"
+all_text = all_text.gsub "end{enumerate}\n\n", "end{compactenum}\n\\par\\vspace{0.6em}\\noindent\n"
 all_text = all_text.gsub "itemize", "compactitem"
 all_text.gsub! "\\[", "\\begin{align*}\n"
 all_text.gsub! "\\]", "\n\\end{align*}"
