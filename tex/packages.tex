@@ -33,14 +33,10 @@
 \usepackage{paralist}
 %\usepackage[stable]{footmisc} % for footnotes in \section{}s
 
-\ifdefined\layoutmath
-  \newcommand{\layoutcm}{}
-  \newcommand{\layoutstd}{}
-\fi
-
 \ifdefined\layoutcm % computer modern
 \else
   \ifdefined\layoutpalatino
+    \usepackage{mathpazo}
     \usepackage{tgpagella}
   \else
     \usepackage{mathptmx}

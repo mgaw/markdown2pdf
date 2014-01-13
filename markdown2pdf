@@ -70,6 +70,7 @@ while start
             gsub("ξ", "xi").
             gsub("τ", "tau").
             gsub("σ", "sigma").
+            gsub("~", "sim").
             gsub("<->", "leftrightarrow").
             gsub("|--", "vdash").
             gsub("<-->", "enspace leftrightarrow enspace").
