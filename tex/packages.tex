@@ -40,8 +40,12 @@
 
 \ifdefined\layoutcm % computer modern
 \else
-  \usepackage{mathptmx}
-  \usepackage{eucal} % more pretty power set in times font
+  \ifdefined\layoutpalatino
+    \usepackage{tgpagella}
+  \else
+    \usepackage{mathptmx}
+    \usepackage{eucal} % more pretty power set in times font
+  \fi
 \fi
 
 \renewenvironment{quote}{\list{}{\leftmargin=2em\rightmargin=2em\small}\item[]}{\endlist}
