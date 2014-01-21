@@ -25,17 +25,23 @@
 %\maketitle
 \quad
 
-\vspace{0.5cm}
+\vspace{0.6cm}
 \renewcommand{\baselinestretch}{1.2}
+\begin{center}
 \noindent
 \ifdefined\meta
-  {\Large\textbf \titel\footnote{\meta} \par}
+  \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+  %{\Large \titel\let\thefootnote\relax\footnote{\meta} \par}
+  {\Large \titel\footnote{\meta} \par}
+  \renewcommand{\thefootnote}{\arabic{footnote}}
+  \addtocounter{footnote}{-1}
 \else
   {\Large\textbf \titel \par}
 \fi
 \vskip 0.5cm
 \noindent\emph{\autor}
-\vskip 1.5cm
+\end{center}
+\vskip 1.2cm
 \fi
 \newcommand{\layoutindent}{}
 \renewcommand{\baselinestretch}{1}

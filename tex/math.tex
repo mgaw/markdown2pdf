@@ -9,9 +9,14 @@
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\Pp}{\mathcal{P}}
 \newcommand{\Bb}{\mathcal{B}}
+\newcommand{\Nn}{\mathcal{N}}
 \newcommand{\Mm}{\mathcal{M}}
 \newcommand{\Ff}{\mathcal{F}}
 \newcommand{\ggT}{\text{ggT}}
+
+\DeclareMathSymbol{\mlq}{\mathord}{operators}{``}
+\DeclareMathSymbol{\mrq}{\mathord}{operators}{`'}
+
 \DeclareMathOperator{\rang}{rang}
 \DeclareMathOperator{\rg}{rg}
 \DeclareMathOperator{\Rang}{Rang}
@@ -26,6 +31,7 @@
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \DeclareMathOperator{\ord}{ord}
+
 \renewcommand{\phi}{\varphi}
 \newcommand{\lam}{\lambda}
 \newcommand{\om}{\omega}
@@ -65,6 +71,8 @@
 \newcommand{\al}[1]{\begin{aligned}#1\end{aligned}}
 \newcommand{\quine}[1]{\ulcorner #1 \urcorner}
 \newcommand{\set}[1]{\{#1\}}
+\newcommand{\single}[1]{\mlq #1 \mrq}
+\newcommand{\double}[1]{\glqq #1 \grqq}
 \newcommand{\all}{\forall}
 \newcommand{\ex}{\exists}
 
@@ -81,7 +89,3 @@
 
 \newcommand{\concat}{\,\raisebox{0.45em}{\scalebox{0.7}{$\smallfrown$}}\,}
 %\newcommand{\concat}{\,\raisebox{0.3em}{$\smallfrown$}\,}
-
-\DeclareMathSymbol{\mlq}{\mathord}{operators}{``}
-\DeclareMathSymbol{\mrq}{\mathord}{operators}{`'}
-\newcommand{\rrr}[1]{\raisebox{0.15em}{$#1$}}

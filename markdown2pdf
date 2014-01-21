@@ -95,8 +95,8 @@ while start
   # TODO Auch EOL als schließendes "  " zulassen
   # TODO /\W{.*?}/ -> \{...\} für Mengen.
   #
-  puts all_text[start]
-  puts "start #{all_text[start - 1]}, stop #{all_text[stop + 2]}"
+  #puts all_text[start]
+  #puts "start #{all_text[start - 1]}, stop #{all_text[stop + 2]}"
 
   if all_text[start - 1] == 10 && all_text[stop + 2] == 10
     str = "beginalign \\\\(" + str.gsub("  ", "").gsub("\\\\", "\\\\\\\\\\\\\\\\") + "\\\\) endalign" # hui.
