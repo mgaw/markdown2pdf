@@ -79,11 +79,11 @@
   \else
     \usepackage{titlesec}
     \ifdefined\layoutnice
+      \renewcommand{\thesection}{\Roman{section}}
       %\titleformat{\section}{\singlespacing\normalfont\large\bfseries}{\thesection.}{0.5em}{}
-      \titleformat{\section}{\singlespacing\normalsize\itshape}{}{0em}{}
+      \titleformat{\section}{\singlespacing\normalsize\itshape}{\thesection.}{0.5em}{}
       \titleformat{\subsection}{\singlespacing\normalsize\bfseries}{\thesubsection}{0.5em}{}
     \else
-      %\renewcommand{\thesection}{\Roman{section}}
       \titleformat{\section}{\singlespacing\normalfont\Large}{\thesection.}{0.5em}{}
       %\titleformat{\subsection}{\singlespacing\normalfont\bfseries\large}{\thesubsection}{0.5em}{}
       %\titleformat{\subsection}{\singlespacing\normalsize\itshape}{}{0em}{}
