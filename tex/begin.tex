@@ -25,7 +25,7 @@
 %\maketitle
 \quad
 
-\vspace{0.6cm}
+\vspace{0.1cm}
 \renewcommand{\baselinestretch}{1.2}
 \begin{center}
 \noindent
@@ -38,14 +38,15 @@
 \else
   {\Large\textbf \titel \par}
 \fi
-\vskip 0.5cm
+\vskip 1.0cm
 \noindent\emph{\autor}
 \end{center}
-\vskip 1.2cm
+\vskip 0.8cm
 \fi
 \newcommand{\layoutindent}{}
 \renewcommand{\baselinestretch}{1}
 \setstretch{1.25}
+\setlength{\footskip}{25pt}
 \fi
 
 \ifdefined\layoutfnheader
@@ -169,7 +170,8 @@ Fach: Philosophie
   \ifdefined\layoutdoublespacing
     \parindent 2em
   \else
-    \parindent 1.1em
+    %\parindent 1.1em
+    \parindent 1.8em
   \fi
   \parskip 0pt
 \fi
