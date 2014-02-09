@@ -29,17 +29,24 @@
 \renewcommand{\baselinestretch}{1.2}
 \begin{center}
 \noindent
+%\ifdefined\meta
+%  \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%  %{\Large \titel\let\thefootnote\relax\footnote{\meta} \par}
+%  {\Large \titel\footnote{\meta} \par}
+%  \renewcommand{\thefootnote}{\arabic{footnote}}
+%  \addtocounter{footnote}{-1}
+%\else
+  {\Large \titel \par}
+%\fi
+\vskip 1.0cm
 \ifdefined\meta
   \renewcommand{\thefootnote}{\fnsymbol{footnote}}
-  %{\Large \titel\let\thefootnote\relax\footnote{\meta} \par}
-  {\Large \titel\footnote{\meta} \par}
+  \noindent \autor\footnote{\meta}
   \renewcommand{\thefootnote}{\arabic{footnote}}
   \addtocounter{footnote}{-1}
 \else
-  {\Large\textbf \titel \par}
+  \noindent \autor
 \fi
-\vskip 1.0cm
-\noindent\emph{\autor}
 \end{center}
 \vskip 0.8cm
 \fi
@@ -47,6 +54,13 @@
 \renewcommand{\baselinestretch}{1}
 \setstretch{1.25}
 \setlength{\footskip}{25pt}
+\ifdefined\layoutnice
+  \setlength{\plpartopsep}{3pt}
+  \setlength{\pltopsep}{0pt}
+  \setlength{\plitemsep}{6pt}
+  \defaultleftmargin{3em}{24pt}{6pt}{6pt}
+  \setlength{\itemindent}{100pt}
+\fi
 \fi
 
 \ifdefined\layoutfnheader

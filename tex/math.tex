@@ -71,10 +71,15 @@
 \newcommand{\al}[1]{\begin{aligned}#1\end{aligned}}
 \newcommand{\quine}[1]{\ulcorner #1 \urcorner}
 \newcommand{\set}[1]{\{#1\}}
-\newcommand{\single}[1]{\mlq #1 \mrq}
+\newcommand{\mq}[1]{\mlq #1 \mrq}
+\newcommand{\single}[1]{\glq #1 \grq}
 \newcommand{\double}[1]{\glqq #1 \grqq}
+\newcommand{\oglqq}{\raisebox{-0.10em}{\glqq}} % outer german left double quote
+\newcommand{\ogrqq}{\raisebox{0.10em}{\grqq}}
+\newcommand{\odouble}[1]{\oglqq\, #1 \,\ogrqq}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\pair}[1]{\langle #1 \rangle}
 \newcommand{\all}{\forall}
 \newcommand{\ex}{\exists}
 

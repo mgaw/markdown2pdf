@@ -46,6 +46,13 @@ lines = lines.insert(lines.index("\n"),
 first_bib_line = lines.index "# Literatur\n"
 first_bib_line ||= lines.length
 
+lines.each do |line|
+  if line =~ /^(\(\S+\)) /
+    match = $1
+    line = line.sub!(/^\(\S+\) /, "1. [#{match}] ")
+  end
+end
+
 # + 2 wegen "# Literatur" soll nicht mehr drinstehen
 bib_text = (lines[(first_bib_line + 2)...lines.length] or []).join
 all_text = lines[0...first_bib_line].join
@@ -158,7 +165,7 @@ lines.insert(0, "\\newcommand{\\wordcount}{#{wordcount}}\n")
   if lines[i] =~ /^(\S*?:) /
     match = $1
 
-    lines[i] = "\\par\\vspace{0.6em}\n\\hangindent=2em\n\\hangafter=1\n\\noindent " + lines[i].sub(/^\S*?: /, "\\textbf{#{match}} \\;")
+    lines[i] = "\\par\\vspace{0.6em}\n\\hangindent=2em\n\\hangafter=1\n\\noindent " + lines[i].sub(/^\S*?: /, "\\textbf{#{match.gsub("_", " ")}} \\;")
 
     # assuming not working with linebreaks.
     lines[i + 1] = "\n\\par\\vspace{0.6em}\\noindent "
@@ -188,6 +195,8 @@ all_text.gsub! "\\]", "\n\\end{align*}"
 
 all_text.gsub!("\\beginalign $", "\\vspace{-2.3em}\\begin{align*}\n")
 all_text.gsub!("$ \\endalign", "\n\\end{align*}\\vspace{-2.4em}")
+
+all_text.gsub!("\\$", "$")
 
 # "Bla.. " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...
