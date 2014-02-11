@@ -197,6 +197,7 @@ all_text.gsub!("\\beginalign $", "\\vspace{-2.3em}\\begin{align*}\n")
 all_text.gsub!("$ \\endalign", "\n\\end{align*}\\vspace{-2.4em}")
 
 all_text.gsub!("\\$", "$")
+all_text.gsub!("\\textbackslash{}", "\\")
 
 # "Bla.. " ersetzen
 #all_text = all_text.gsub /(?<!\.)\.\.\s/, ".\\quad " # muss Lösung ohne lookbehind finden. vll ... -> äöü, .. -> quad, äöü -> ...
