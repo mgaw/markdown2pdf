@@ -49,7 +49,7 @@ first_bib_line ||= lines.length
 lines.each do |line|
   if line =~ /^(\(\S+\)) /
     match = $1
-    line = line.sub!(/^\(\S+\) /, "1. [#{match}] ")
+    line = line.sub!(/^\(\S+\) /, "1. [#{match}]  enspace  ")
   end
 end
 
