@@ -43,7 +43,7 @@ lines = lines.insert(lines.index("\n"),
 (0..lines.index("\n")).each { |i| lines[i] = lines[i].gsub(/  +/, " ").strip + "\n" }
 
 # remove bib
-first_bib_line = lines.index "# Literatur\n"
+first_bib_line = (lines.index("# Literatur\n") or lines.index("# References\n"))
 first_bib_line ||= lines.length
 
 lines.each do |line|
@@ -197,6 +197,7 @@ all_text.gsub!("\\beginalign $", "\\vspace{-2.3em}\\begin{align*}\n")
 all_text.gsub!("$ \\endalign", "\n\\end{align*}\\vspace{-2.4em}")
 
 all_text.gsub!("\\$", "$")
+all_text.gsub!("\\_", "_")
 all_text.gsub!("\\textbackslash{}", "\\")
 
 # "Bla.. " ersetzen

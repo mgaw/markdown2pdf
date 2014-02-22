@@ -18,6 +18,36 @@
 \vspace{0.5cm}
 \fi
 
+\ifdefined\layoutdouble
+  \ifdefined\titel
+    \quad\par
+    \vspace{0.1cm}
+    \renewcommand{\baselinestretch}{1.2}
+    \begin{center}
+      \noindent {\Large \titel \par}
+      \vskip 1.0cm
+      \ifdefined\meta
+        \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+        \noindent \autor\footnote{\meta}
+        \renewcommand{\thefootnote}{\arabic{footnote}}
+        \addtocounter{footnote}{-1}
+      \else
+        \noindent \autor
+      \fi
+    \end{center}
+    \vskip 0.8cm
+  \fi
+  \newcommand{\layoutindent}{}
+  \newcommand{\layoutdoublespacing}{}
+  \renewcommand{\baselinestretch}{1}
+  \setlength{\footskip}{25pt}
+  \setlength{\plpartopsep}{3pt}
+  \setlength{\pltopsep}{0pt}
+  \setlength{\plitemsep}{6pt}
+  \defaultleftmargin{3em}{24pt}{6pt}{6pt}
+  \setlength{\itemindent}{100pt}
+\fi
+
 \ifdefined\layoutnice
 \ifdefined\titel
 %\title{\titel\footnote{\meta. Matrikelnummer: \matrikelnummer, E-Mail: \email. Eingereicht am \today.}}

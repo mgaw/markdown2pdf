@@ -1,3 +1,6 @@
+\ifdefined\layoutnice \newcommand{\layouttwelvept}{} \fi
+\ifdefined\layoutdouble \newcommand{\layouttwelvept}{} \fi
+
 \ifdefined\layoutletter
   \documentclass[fontsize=11pt, paper=a4,
     enlargefirstpage=on, pagenumber=headright,
@@ -9,16 +12,15 @@
     \ifdefined\layoutsmall
       \documentclass[twocolumn, paper=a4, fontsize=9pt]{scrartcl}
     \else
-      \ifdefined\layoutnice
-        \documentclass[paper=a4, fontsize=12pt, bibtotoc]{scrartcl}
-      \else
-        \documentclass[paper=a4, fontsize=11pt, bibtotoc]{scrartcl}
-      \fi
+      \documentclass[paper=a4, fontsize=11pt, bibtotoc]{scrartcl}
     \fi
   \fi
 \fi
 
-\usepackage[ngerman]{babel}
+\ifdefined\layouten
+\else
+  \usepackage[ngerman]{babel}
+\fi
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -45,7 +47,12 @@
 \fi
 
 \renewenvironment{quote}{\list{}{\leftmargin=2em\rightmargin=0em\small}\item[]}{\endlist}
-\expandafter\def\expandafter\quote\expandafter{\quote\vspace{-1.1em}\singlespacing}
+
+\ifdefined\layoutnice
+  \expandafter\def\expandafter\quote\expandafter{\quote\vspace{-1.1em}\singlespacing}
+\else
+  \expandafter\def\expandafter\quote\expandafter{\quote\vspace{-0.6em}\singlespacing}
+\fi
 
 \newenvironment{defs}{\list{}{\leftmargin=1em\rightmargin=0em}\item[]\begin{compactitem}}{\end{compactitem}\endlist}
 
@@ -66,7 +73,7 @@
       \ifdefined\layoutnice
         \usepackage[top=3cm, bottom=2.9cm, left=3.5cm, right=4cm]{geometry}
       \else
-        \usepackage[top=2cm, bottom=3cm, left=3cm, right=3cm]{geometry}
+        \usepackage[top=3cm, bottom=3cm, left=3cm, right=3cm]{geometry}
       \fi
     \fi
   \fi
@@ -84,7 +91,7 @@
       \titleformat{\section}{\singlespacing\normalsize\itshape}{\thesection.}{0.5em}{}
       \titleformat{\subsection}{\singlespacing\normalsize\bfseries}{\thesubsection}{0.5em}{}
     \else
-      \titleformat{\section}{\singlespacing\normalfont\Large}{\thesection.}{0.5em}{}
+      \titleformat{\section}{\singlespacing\normalfont\large}{\thesection.}{0.5em}{}
       %\titleformat{\subsection}{\singlespacing\normalfont\bfseries\large}{\thesubsection}{0.5em}{}
       %\titleformat{\subsection}{\singlespacing\normalsize\itshape}{}{0em}{}
       \titleformat{\subsection}{\singlespacing\normalsize\itshape}{\thesubsection}{0.5em}{}
